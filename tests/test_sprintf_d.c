@@ -1,7 +1,7 @@
 #include "test_me.h"
 
-// One parameter znaked
-START_TEST(sprintf_1_znaked) {
+// One parameter signed
+START_TEST(sprintf_1_signed) {
   char str1[100] = "";
   char str2[100] = "";
   char *str3 = "Test %d Test";
@@ -11,8 +11,8 @@ START_TEST(sprintf_1_znaked) {
 }
 END_TEST
 
-// Three znaked parameters
-START_TEST(sprintf_2_znaked) {
+// Three signed parameters
+START_TEST(sprintf_2_signed) {
   char str1[100];
   char str2[100];
   char *str3 = "%d Test %d Test %d";
@@ -26,7 +26,7 @@ START_TEST(sprintf_2_znaked) {
 END_TEST
 
 // Three decimal parameters
-START_TEST(sprintf_3_znaked) {
+START_TEST(sprintf_3_signed) {
   char str1[100];
   char str2[100];
   char *str3 = "%d Test %d Test %d";
@@ -40,7 +40,7 @@ START_TEST(sprintf_3_znaked) {
 END_TEST
 
 // Different sizes
-START_TEST(sprintf_4_znaked) {
+START_TEST(sprintf_4_signed) {
   char str1[100];
   char str2[100];
   char *str3 = "%ld Test %ld Test %hd GOD %hd";
@@ -55,7 +55,7 @@ START_TEST(sprintf_4_znaked) {
 END_TEST
 
 // Different width
-START_TEST(sprintf_5_znaked) {
+START_TEST(sprintf_5_signed) {
   char str1[100];
   char str2[100];
   char *str3 = "%3d Test %5d Test %10d";
@@ -69,7 +69,7 @@ START_TEST(sprintf_5_znaked) {
 END_TEST
 
 // Different precision and width
-START_TEST(sprintf_6_znaked) {
+START_TEST(sprintf_6_signed) {
   char str1[200];
   char str2[200];
   char *str3 = "%6.5d Test %.23d Test %3.d TEST %.d %.6d";
@@ -85,7 +85,7 @@ START_TEST(sprintf_6_znaked) {
 END_TEST
 
 // Minus flag
-START_TEST(sprintf_7_znaked) {
+START_TEST(sprintf_7_signed) {
   char str1[200];
   char str2[200];
   char *str3 = "%-10.5d Test %-.8d Test %-7d TEST %-.d";
@@ -100,7 +100,7 @@ START_TEST(sprintf_7_znaked) {
 END_TEST
 
 // Zeroes
-START_TEST(sprintf_8_znaked) {
+START_TEST(sprintf_8_signed) {
   char str1[200];
   char str2[200];
   char *str3 = "%0d Test %0.d Test %0.0d TEST %0d GOD %.d";
@@ -116,7 +116,7 @@ START_TEST(sprintf_8_znaked) {
 END_TEST
 
 // Pluses
-START_TEST(sprintf_9_znaked) {
+START_TEST(sprintf_9_signed) {
   char str1[200];
   char str2[200];
   char *str3 = "%+d Test %+3.d Test %+5.7d TEST %+10d";
@@ -131,7 +131,7 @@ START_TEST(sprintf_9_znaked) {
 END_TEST
 
 // Zero vals
-START_TEST(sprintf_10_znaked) {
+START_TEST(sprintf_10_signed) {
   char str1[200];
   char str2[200];
   char *str3 = "%d Test %3.d Test %5.7d TEST %10d %#d %-d %+d %.d % .d";
@@ -145,7 +145,7 @@ START_TEST(sprintf_10_znaked) {
 END_TEST
 
 // Spaces
-START_TEST(sprintf_11_znaked) {
+START_TEST(sprintf_11_signed) {
   char str1[200];
   char str2[200];
   char *str3 = "% d Test % 3.d Test % 5.7d TEST % 10d GOD %.d";
@@ -161,7 +161,7 @@ START_TEST(sprintf_11_znaked) {
 END_TEST
 
 // Plus
-START_TEST(sprintf_12_znaked) {
+START_TEST(sprintf_12_signed) {
   char str1[200];
   char str2[200];
   char *str3 = "%+d Test %+3.d Test %+5.7d TEST %+10d GOD %+.d";
@@ -177,7 +177,7 @@ START_TEST(sprintf_12_znaked) {
 END_TEST
 
 // Hash
-START_TEST(sprintf_13_znaked) {
+START_TEST(sprintf_13_signed) {
   char str1[200];
   char str2[200];
   char *str3 = "%#d Test %#3d Test %#5.7d TEST %#.7d Oof %#.d";
@@ -193,7 +193,7 @@ START_TEST(sprintf_13_znaked) {
 END_TEST
 
 // ZERO flag
-START_TEST(sprintf_14_znaked) {
+START_TEST(sprintf_14_signed) {
   char str1[200];
   char str2[200];
   char *str3 = "%0d Test %06d Test %05.7d TEST %0.7d Oof %0.d";
@@ -209,7 +209,7 @@ START_TEST(sprintf_14_znaked) {
 END_TEST
 
 // Asterisk
-START_TEST(sprintf_15_znaked) {
+START_TEST(sprintf_15_signed) {
   char str1[200];
   char str2[200];
   char *str3 = "%*d Test %-*d Test %*.*d TEST %.*d";
@@ -231,7 +231,7 @@ START_TEST(sprintf_15_znaked) {
 END_TEST
 
 // Simple extra test
-START_TEST(sprintf_16_znaked) {
+START_TEST(sprintf_16_signed) {
   char str1[100] = "";
   char str2[100] = "";
   char *str3 = "%d";
@@ -240,7 +240,7 @@ START_TEST(sprintf_16_znaked) {
   ck_assert_pstr_eq(str1, str2);
 }
 END_TEST
-START_TEST(sprintf_17_znaked) {
+START_TEST(sprintf_17_signed) {
   char str1[1024] = "";
   char str2[1024] = "";
   int val = -75;
@@ -250,7 +250,7 @@ START_TEST(sprintf_17_znaked) {
 }
 END_TEST
 
-START_TEST(sprintf_19_znaked) {
+START_TEST(sprintf_19_signed) {
   char str1[200];
   char str2[200];
   char *str3 = "%- d Test %- 15d sdasda %- 15d sdsad %- d";
@@ -264,28 +264,28 @@ START_TEST(sprintf_19_znaked) {
 }
 END_TEST
 
-Suite *test_sprintf_znaked(void) {
+Suite *test_sprintf_signed(void) {
   Suite *s = suite_create("\033[45m-=S21_SPRINTF_SIGNED=-\033[0m");
   TCase *tc = tcase_create("sprintf_tc");
 
-  tcase_add_test(tc, sprintf_1_znaked);
-  tcase_add_test(tc, sprintf_2_znaked);
-  tcase_add_test(tc, sprintf_3_znaked);
-  tcase_add_test(tc, sprintf_4_znaked);
-  tcase_add_test(tc, sprintf_5_znaked);
-  tcase_add_test(tc, sprintf_6_znaked);
-  tcase_add_test(tc, sprintf_7_znaked);
-  tcase_add_test(tc, sprintf_8_znaked);
-  tcase_add_test(tc, sprintf_9_znaked);
-  tcase_add_test(tc, sprintf_10_znaked);
-  tcase_add_test(tc, sprintf_11_znaked);
-  tcase_add_test(tc, sprintf_12_znaked);
-  tcase_add_test(tc, sprintf_13_znaked);
-  tcase_add_test(tc, sprintf_14_znaked);
-  tcase_add_test(tc, sprintf_15_znaked);
-  tcase_add_test(tc, sprintf_16_znaked);
-  tcase_add_test(tc, sprintf_17_znaked);
-  tcase_add_test(tc, sprintf_19_znaked);
+  tcase_add_test(tc, sprintf_1_signed);
+  tcase_add_test(tc, sprintf_2_signed);
+  tcase_add_test(tc, sprintf_3_signed);
+  tcase_add_test(tc, sprintf_4_signed);
+  tcase_add_test(tc, sprintf_5_signed);
+  tcase_add_test(tc, sprintf_6_signed);
+  tcase_add_test(tc, sprintf_7_signed);
+  tcase_add_test(tc, sprintf_8_signed);
+  tcase_add_test(tc, sprintf_9_signed);
+  tcase_add_test(tc, sprintf_10_signed);
+  tcase_add_test(tc, sprintf_11_signed);
+  tcase_add_test(tc, sprintf_12_signed);
+  tcase_add_test(tc, sprintf_13_signed);
+  tcase_add_test(tc, sprintf_14_signed);
+  tcase_add_test(tc, sprintf_15_signed);
+  tcase_add_test(tc, sprintf_16_signed);
+  tcase_add_test(tc, sprintf_17_signed);
+  tcase_add_test(tc, sprintf_19_signed);
 
   suite_add_tcase(s, tc);
   return s;

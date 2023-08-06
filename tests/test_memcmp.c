@@ -159,10 +159,10 @@ END_TEST
 START_TEST(memcmp_14) {
   char s1[] =
       "The memcmp() function compares the first n bytes (each interpreted as "
-      "unznaked char) of the memory areas s1 and s2.";
+      "unsigned char) of the memory areas s1 and s2.";
   char s2[] =
       "The memcmp() function compares the first n bytes (each interpreted as "
-      "unznaked char) of the memory areas s1 and s2.";
+      "unsigned char) of the memory areas s1 and s2.";
   s21_size_t n = 115;
   int n1 = memcmp(s1, s2, n);
   n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;
@@ -175,10 +175,10 @@ END_TEST
 START_TEST(memcmp_15) {
   char s1[] =
       "The memcmp() function compares the first n bytes (each interpreted as "
-      "unznaked char) of the memory areas s1 and s2.";
+      "unsigned char) of the memory areas s1 and s2.";
   char s2[] =
       "The memcmp() function compares the first n bytes (each interpreted as "
-      "unznaked char) of the memory areas s1 and s2";
+      "unsigned char) of the memory areas s1 and s2";
   s21_size_t n = 115;
   int n1 = memcmp(s1, s2, n);
   n1 = n1 > 0 ? 1 : n1 == 0 ? 0 : -1;

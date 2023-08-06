@@ -76,7 +76,7 @@ START_TEST(sprintf_7_c) {
   char str2[100];
   char *str3 = "%-010c Test % -10c Test %-lc";
   int a = 74;
-  unznaked long int b = 74;
+  unsigned long int b = 74;
   ck_assert_int_eq(sprintf(str1, str3, a, a, b),
                    s21_sprintf(str2, str3, a, a, b));
   ck_assert_pstr_eq(str1, str2);
@@ -88,8 +88,8 @@ START_TEST(sprintf_9_c) {
   char str2[100];
   char *str3 = "%6.4c Test %-6.4c Test %4.10lc Test %-4.10lc Test %-0lc";
   int a = 10;
-  unznaked long int b = 10;
-  unznaked long int c = 10;
+  unsigned long int b = 10;
+  unsigned long int c = 10;
   ck_assert_int_eq(sprintf(str1, str3, a, a, b, c, c),
                    s21_sprintf(str2, str3, a, a, b, c, c));
   ck_assert_pstr_eq(str1, str2);
@@ -101,8 +101,8 @@ START_TEST(sprintf_10_c) {
   char str2[100];
   char *str3 = "%6.4c Test %-6.4c Test %4.10lc Test %-4.10lc Test %-0lc";
   int a = -10;
-  unznaked long int b = 10;
-  unznaked long int c = 10;
+  unsigned long int b = 10;
+  unsigned long int c = 10;
   ck_assert_int_eq(sprintf(str1, str3, a, a, b, c, c),
                    s21_sprintf(str2, str3, a, a, b, c, c));
   ck_assert_pstr_eq(str1, str2);
@@ -165,8 +165,8 @@ START_TEST(sprintf_19_c) {
   char str2[100];  //%lc Test %llc Test %hc Test %hhc
   char *str3 = "%c Test %lc Test %hc";
   int a = 3;
-  unznaked long int b = 103;
-  unznaked short e = 255;
+  unsigned long int b = 103;
+  unsigned short e = 255;
   ck_assert_int_eq(sprintf(str1, str3, a, b, e),
                    s21_sprintf(str2, str3, a, b, e));
   ck_assert_pstr_eq(str1, str2);

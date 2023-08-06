@@ -35,7 +35,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_3) {
   char format[] = "%hhd";
   char str[] = "+123";
-  znaked char d1, d2;
+  signed char d1, d2;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -47,7 +47,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_4) {
   char format[] = "%3hhd";
   char str[] = "-123";
-  znaked char d1, d2;
+  signed char d1, d2;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -59,7 +59,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_5) {
   char format[] = "%4hhd";
   char str[] = "-123";
-  znaked char d1, d2;
+  signed char d1, d2;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -71,7 +71,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_6) {
   char format[] = "%10hhd";
   char str[] = "-123";
-  znaked char d1, d2;
+  signed char d1, d2;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -83,7 +83,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_7) {
   char format[] = "%1hhd";
   char str[] = "-123";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -95,7 +95,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_8) {
   char format[] = "%3hhd";
   char str[] = "+123";
-  znaked char d1, d2;
+  signed char d1, d2;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -107,7 +107,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_9) {
   char format[] = "%4hhd";
   char str[] = "+123";
-  znaked char d1, d2;
+  signed char d1, d2;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -119,7 +119,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_10) {
   char format[] = "%10hhd";
   char str[] = "+123";
-  znaked char d1, d2;
+  signed char d1, d2;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -131,7 +131,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_11) {
   char format[] = "%1hhd";
   char str[] = "+123";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -143,7 +143,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_12) {
   char format[] = "%*1hhd";
   char str[] = "+123";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -155,7 +155,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_13) {
   char format[] = "%*hhd";
   char str[] = "123";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -167,7 +167,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_14) {
   char format[] = "%hhd";
   char str[] = "2147483647";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -179,7 +179,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_15) {
   char format[] = "%hhd";
   char str[] = "+2147483648";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -191,7 +191,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_16) {
   char format[] = "%hhd";
   char str[] = "214743483648";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -203,7 +203,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_17) {
   char format[] = "%hhd";
   char str[] = "-2147483648";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -215,7 +215,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_18) {
   char format[] = "%hhd";
   char str[] = "-2147483649";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -227,7 +227,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_19) {
   char format[] = "%hhd";
   char str[] = "-214748364239";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -239,7 +239,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_20) {
   char format[] = "%hhd";
   char str[] = "−9223372036854775808";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -251,7 +251,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_21) {
   char format[] = "%hhd";
   char str[] = "−9223372036854775809";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -263,7 +263,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_22) {
   char format[] = "%hhd";
   char str[] = "−922337203685477582309";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -275,7 +275,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_23) {
   char format[] = "%hhd";
   char str[] = "9223372036854775807";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -287,7 +287,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_24) {
   char format[] = "%hhd";
   char str[] = "9223372036854775808";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
@@ -299,7 +299,7 @@ END_TEST
 START_TEST(sscanf_spec_hhd_25) {
   char format[] = "%hhd";
   char str[] = "922337203685477582309";
-  znaked char d1 = 0, d2 = 0;
+  signed char d1 = 0, d2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1);
   int16_t res2 = sscanf(str, format, &d2);
