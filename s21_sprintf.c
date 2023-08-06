@@ -8,7 +8,7 @@ int s21_sprintf(char *str, const char *format, ...) {
   int zero_str_flag = 0;
   while (*format) {
     struct s_struct formats = {0};
-    formats.Precision = -1;
+    formats.accuracy = -1;
     if (*format != '%') {
       add_char(str, format, &zero_str_flag, &formats);
     }
@@ -18,21 +18,21 @@ int s21_sprintf(char *str, const char *format, ...) {
         set_flags(&formats, format++);
       }
       while (check_dig(format) || *format == '*') {
-        set_width_Precision(&formats.Width, format++, &arg);
-        if (formats.Width < 0) {
-          formats.Width *= -1;
+        set_width_accuracy(&formats.Wdt, format++, &arg);
+        if (formats.Wdt < 0) {
+          formats.Wdt *= -1;
           formats.flag_m = 1;
         }
       }
       if (*format == '.') {
         format++;
         formats.point = 1;
-        formats.Precision = 0;
+        formats.accuracy = 0;
         while (check_dig(format) || *format == '*')
-          set_width_Precision(&formats.Precision, format++, &arg);
+          set_width_accuracy(&formats.accuracy, format++, &arg);
       }
       if (check_lenght(format)) {
-        formats.flag_length = *format;
+        formats.flag_l = *format;
         format++;
       }
       if (check_specf(&formats, format)) {
@@ -82,7 +82,7 @@ void s21_check(const char *format, char *str, struct s_struct *formats, va_list 
 void s21_gG(char *tmp_str, va_list *arg, struct s_struct *formats) {
   long double l_number = 0;
   double number = 0;
-  if (formats->flag_length == 'L') {
+  if (formats->flag_l == 'L') {
     l_number = va_arg(*arg, long double);
     s21_gG_to_str(formats, tmp_str, l_number);
   } else {
@@ -98,17 +98,17 @@ void s21_gG_to_str(struct s_struct *formats, char *tmp_str,
     formats->sign = number < 0 ? -1 : 1;
     int local_sign = formats->sign;
     number *= formats->sign;
-    int safe_pricision = formats->Precision;
+    int safe_pricision = formats->accuracy;
     char *str_eE = s21_NULL, *str_f = s21_NULL;
     str_eE = calloc(1024, sizeof(char));
     str_f = calloc(1024, sizeof(char));
-    if (number < 1 && formats->Precision < 0) {
-      formats->Precision = 4;
+    if (number < 1 && formats->accuracy < 0) {
+      formats->accuracy = 4;
     } else {
-      formats->Precision--;
+      formats->accuracy--;
     }
     s21_eE_to_str(formats, str_eE, number);
-    formats->Precision = safe_pricision;
+    formats->accuracy = safe_pricision;
     int point = 0, flag_int = 0;
     int t_number = roundl(number);
     if (t_number == number) {
@@ -118,7 +118,7 @@ void s21_gG_to_str(struct s_struct *formats, char *tmp_str,
       t_number /= 10;
       point++;
     }
-    formats->Precision -= point;
+    formats->accuracy -= point;
     if (flag_int == 0) {
       s21_float_to_str(formats, str_f, number);
       s21_delete_zero(str_f, formats);
@@ -126,8 +126,8 @@ void s21_gG_to_str(struct s_struct *formats, char *tmp_str,
       s21_int_to_str(formats, str_f, number);
       s21_delete_zero(str_f, formats);
     }
-    formats->Precision = safe_pricision;
-    s21_strcat(tmp_str, (formats->step >= -4 && formats->Precision > formats->step) ? str_f : str_eE);
+    formats->accuracy = safe_pricision;
+    s21_strcat(tmp_str, (formats->step >= -4 && formats->accuracy > formats->step) ? str_f : str_eE);
     formats->sign = local_sign;
     free(str_eE);
     free(str_f);
@@ -137,7 +137,7 @@ void s21_gG_to_str(struct s_struct *formats, char *tmp_str,
 }
 void s21_delete_zero(char *tmp_str, struct s_struct *formats) {
   int len_str = s21_strlen(tmp_str) - 1;
-  if (formats->Precision > 0)
+  if (formats->accuracy > 0)
     while (tmp_str[len_str] == '0') {
       tmp_str[len_str] = '\0';
       len_str--;
@@ -148,7 +148,7 @@ void s21_eE(char *tmp_str, va_list *arg, struct s_struct *formats) {
   long double ld_number = 0;
   double number = 0;
 
-  if (formats->flag_length == 'L') {
+  if (formats->flag_l == 'L') {
     ld_number = va_arg(*arg, long double);
     s21_eE_to_str(formats, tmp_str, ld_number);
   } else {
@@ -192,7 +192,7 @@ void s21_eE_to_str(struct s_struct *formats, char *tmp_str, long double number) 
   long double right = 0;
   right = modfl(number, &left);
   left = roundl(left);
-  for (int i = 0; i < formats->Precision; i++) {
+  for (int i = 0; i < formats->accuracy; i++) {
     right *= 10;
     check *= 10;
   }
@@ -201,17 +201,17 @@ void s21_eE_to_str(struct s_struct *formats, char *tmp_str, long double number) 
   }
   right = roundl(right);
   s21_int_to_str(formats, tmp_str, left);
-  if ((formats->Precision > 0) || formats->flag_Sharp == 1) {
+  if ((formats->accuracy > 0) || formats->flag_h == 1) {
     s21_strcat(tmp_str, ".");
   }
   if (roundl(right) != check && right != 0) {
     s21_int_to_str(formats, r_line, right);
   }
-  if (s21_strchr("eE", formats->specifier)) {
+  if (s21_strchr("eE", formats->spec)) {
     s21_string_precision(formats, r_line);
   }
   s21_strcat(tmp_str, r_line);
-  if (s21_strchr("gG", formats->specifier) && formats->flag_Sharp != 1) {
+  if (s21_strchr("gG", formats->spec) && formats->flag_h != 1) {
     s21_delete_zero(tmp_str, formats);
   }
   s21_mantis(tmp_str, formats, notation, str_notat, flag);
@@ -219,7 +219,7 @@ void s21_eE_to_str(struct s_struct *formats, char *tmp_str, long double number) 
 }
 
 void s21_mantis(char *tmp_str, struct s_struct *formats, int notation, char *str_notat, int flag) {
-  if (s21_strchr("eg", formats->specifier)) {
+  if (s21_strchr("eg", formats->spec)) {
     s21_strcat(tmp_str, "e");
   } else {
     s21_strcat(tmp_str, "E");
@@ -269,10 +269,10 @@ void s21_xX(char *tmp_str, va_list *arg, struct s_struct *formats) {
   unsigned int number = 0;
 
 
-  if (formats->flag_length == 'l') {
+  if (formats->flag_l == 'l') {
     ld_number = va_arg(*arg, unsigned long);
     s21_xX_to_str(formats, tmp_str, ld_number);
-  } else if (formats->flag_length == 'h') {
+  } else if (formats->flag_l == 'h') {
     sd_number = (unsigned short)va_arg(*arg, unsigned int);
     s21_xX_to_str(formats, tmp_str, sd_number);
   } else {
@@ -289,10 +289,10 @@ void s21_u(char *tmp_str, va_list *arg, struct s_struct *formats) {
   unsigned int number = 0;
 
 
-  if (formats->flag_length == 'l') {
+  if (formats->flag_l == 'l') {
     ul_number = va_arg(*arg, unsigned long);
     s21_u_to_str(formats, tmp_str, ul_number);
-  } else if (formats->flag_length == 'h') {
+  } else if (formats->flag_l == 'h') {
     us_number = (unsigned short)va_arg(*arg, unsigned int);
     s21_u_to_str(formats, tmp_str, us_number);
   } else {
@@ -309,10 +309,10 @@ void s21_o(char *tmp_str, va_list *arg, struct s_struct *formats) {
   unsigned short int sd_number = 0;
   unsigned int number = 0;
 
-  if (formats->flag_length == 'l') {
+  if (formats->flag_l == 'l') {
     ld_number = va_arg(*arg, unsigned long int);
     s21_o_to_str(formats, tmp_str, ld_number);
-  } else if (formats->flag_length == 'h') {
+  } else if (formats->flag_l == 'h') {
     sd_number = (unsigned short)va_arg(*arg, unsigned int);
     s21_o_to_str(formats, tmp_str, sd_number);
   } else {
@@ -328,15 +328,15 @@ void s21_s(char *p_str, va_list *arg, struct s_struct *formats) {
   char *string = s21_NULL;
   string = va_arg(*arg, char *);
   if (string == s21_NULL) {
-    if (formats->Precision > 6 || formats->point == !1) {
+    if (formats->accuracy > 6 || formats->point == !1) {
       s21_strcat(p_str, "(null)");
     }
     else {
       s21_strcat(p_str, "");
     }
   } else {
-    if (formats->Precision > -1) {
-      s21_strncat(p_str, string, formats->Precision);
+    if (formats->accuracy > -1) {
+      s21_strncat(p_str, string, formats->accuracy);
     }
     else {
       s21_strcat(p_str, string);
@@ -351,7 +351,7 @@ void s21_f(char *tmp_str, va_list *arg, struct s_struct *formats) {
   double d_number = 0;
   long double l_number = 0;
 
-  if (formats->flag_length == 'L') {
+  if (formats->flag_l == 'L') {
     l_number = va_arg(*arg, long double);
     s21_float_to_str(formats, tmp_str, l_number);
   } else {
@@ -367,10 +367,10 @@ void s21_d(char *tmp_str, va_list *arg, struct s_struct *formats) {
   long int li_number = 0;
   short int sh_number = 0;
 
-  if (formats->flag_length == 'l') {
+  if (formats->flag_l == 'l') {
     li_number = va_arg(*arg, long int);
     s21_int_to_str(formats, tmp_str, li_number);
-  } else if (formats->flag_length == 'h') {
+  } else if (formats->flag_l == 'h') {
     sh_number = (short)va_arg(*arg, int);
     s21_int_to_str(formats, tmp_str, sh_number);
   } else {
@@ -387,7 +387,7 @@ void s21_xX_to_str(struct s_struct *formats, char *tmp_str, unsigned long long n
   int x_or_X = 0;
   point = tmp_str;
 
-  if (formats->specifier == 'x') {
+  if (formats->spec == 'x') {
     x_or_X = 32;
   } else {
     x_or_X = 0;
@@ -416,7 +416,7 @@ void s21_xX_to_str(struct s_struct *formats, char *tmp_str, unsigned long long n
     }
   *point = '\0';
   if (number == 0) {
-    formats->flag_Sharp = 0;
+    formats->flag_h = 0;
   }
   s21_reverse_string(tmp_str);
 }
@@ -463,7 +463,7 @@ void s21_o_to_str(struct s_struct *formats, char *tmp_str, long long number) {
       }
       *(point++) = (char)(digit + '0');
     }
-  if (formats->flag_Sharp == 1 && check_number != 0) {
+  if (formats->flag_h == 1 && check_number != 0) {
      *(point++) = '0';
   }
   *point = '\0';
@@ -471,11 +471,11 @@ void s21_o_to_str(struct s_struct *formats, char *tmp_str, long long number) {
 }
 
 void s21_default_precision(struct s_struct *formats) {
-  if (formats->point && formats->Precision <= 0) {
-    formats->Precision = 0;
+  if (formats->point && formats->accuracy <= 0) {
+    formats->accuracy = 0;
   }
-  if (!formats->point && s21_strchr("eEfgG", formats->specifier)) {
-    formats->Precision = 6;
+  if (!formats->point && s21_strchr("eEfgG", formats->spec)) {
+    formats->accuracy = 6;
   }
 }
 
@@ -489,7 +489,7 @@ void s21_float_to_str(struct s_struct *formats, char *tmp_str, long double numbe
 
   number *= formats->sign;
   int local_sign = formats->sign;
-  if (formats->Precision <= 0) {
+  if (formats->accuracy <= 0) {
     s21_int_to_str(formats, tmp_str, roundl(number));
   } else {
     long double left = 0;
@@ -497,7 +497,7 @@ void s21_float_to_str(struct s_struct *formats, char *tmp_str, long double numbe
     long double check = 1;
     right = modfl(number, &left);
     left = roundl(left);
-    for (int i = 0; i < formats->Precision; i++) {
+    for (int i = 0; i < formats->accuracy; i++) {
       right *= 10, check *= 10;
     }
     if (roundl(right) == check) {
@@ -524,8 +524,8 @@ void s21_int_to_str(struct s_struct *formats, char *tmp_str, long double number)
     formats->sign = 1;
   }
   number *= formats->sign;
-  if (formats->point == 1 && number == 0 && formats->Precision == 0 && formats->specifier == 'd') {
-    if (formats->Width == 0) {
+  if (formats->point == 1 && number == 0 && formats->accuracy == 0 && formats->spec == 'd') {
+    if (formats->Wdt == 0) {
       s21_strcat(tmp_str, "");
     } else {
       s21_strcat(tmp_str, " ");
@@ -551,15 +551,15 @@ void s21_string_precision(struct s_struct *formats, char *tmp_str) {
   string_precision = calloc(1024, sizeof(char));
   int pos = 0;
   int len_tmp = s21_strlen(tmp_str);
-  if (s21_strchr("feEpdouxX", formats->specifier)) {
-    if (formats->specifier == 'p') {
+  if (s21_strchr("feEpdouxX", formats->spec)) {
+    if (formats->spec == 'p') {
       s21_strcpy(string_precision, tmp_str);
-      for (int i = len_tmp; i < formats->Precision; i++) {
+      for (int i = len_tmp; i < formats->accuracy; i++) {
         string_precision[i] = '0';
       }
       s21_strcpy(tmp_str, string_precision);
     } else {
-      while (pos < formats->Precision - len_tmp) {
+      while (pos < formats->accuracy - len_tmp) {
         string_precision[pos++] = '0';
       }
       for (int i = 0; tmp_str[i] != '\0'; i++) {
@@ -573,7 +573,7 @@ void s21_string_precision(struct s_struct *formats, char *tmp_str) {
 
 void s21_string_flags(struct s_struct *formats, char *tmp_str) {
   int pos = 0;
-  if (!s21_strchr("cuo\%", formats->specifier)) {
+  if (!s21_strchr("cuo\%", formats->spec)) {
     if (formats->sign < 0) {
       s21_move_string(tmp_str);
       tmp_str[pos++] = '-';
@@ -599,13 +599,13 @@ void s21_string_flags(struct s_struct *formats, char *tmp_str) {
       }
       formats->sign = 0;
     }
-    if (formats->flag_Sharp) {
+    if (formats->flag_h) {
       s21_sharp_flag(formats, tmp_str);
     }
   }
   if (formats->flag_m) {
     pos = (int)s21_strlen(tmp_str);
-    while (pos < formats->Width) {
+    while (pos < formats->Wdt) {
       tmp_str[pos++] = ' ';
     }
   }
@@ -613,21 +613,21 @@ void s21_string_flags(struct s_struct *formats, char *tmp_str) {
 
 void s21_sharp_flag(struct s_struct *formats, char *tmp_str) {
   int pos = 0;
-  if (s21_strchr("oxX", formats->specifier)) {
-    if (formats->specifier == 'x' || formats->specifier == 'X') {
+  if (s21_strchr("oxX", formats->spec)) {
+    if (formats->spec == 'x' || formats->spec == 'X') {
       s21_move_string(tmp_str);
     }
 
-    if (formats->specifier == 'o') {
+    if (formats->spec == 'o') {
       ;
     } else {
       s21_move_string(tmp_str);
     }
     tmp_str[pos++] = '0';
 
-    if (formats->specifier != 'o') {
+    if (formats->spec != 'o') {
 
-      if (formats->specifier == 'x') {
+      if (formats->spec == 'x') {
         tmp_str[pos] = 'x';
       } else {
         tmp_str[pos] = 'X';
@@ -635,7 +635,7 @@ void s21_sharp_flag(struct s_struct *formats, char *tmp_str) {
     }
   }
 
-  if (s21_strchr("eEf", formats->specifier)) {
+  if (s21_strchr("eEf", formats->spec)) {
     if (!s21_strchr(tmp_str, '.')) {
       tmp_str[s21_strlen(tmp_str)] = '.';
     }
@@ -643,8 +643,8 @@ void s21_sharp_flag(struct s_struct *formats, char *tmp_str) {
 }
 
 void add_for_fdeEfgG(struct s_struct *formats, char *tmp_str) {
-  if (formats->flag_Zero == 1 && formats->flag_m != 1 && (formats->sign == -1 || formats->flag_s || (formats->sign == 1 && formats->flag_p == 1))) {
-    formats->Width -= 1;
+  if (formats->flag_0 == 1 && formats->flag_m != 1 && (formats->sign == -1 || formats->flag_s || (formats->sign == 1 && formats->flag_p == 1))) {
+    formats->Wdt -= 1;
     s21_string_width(formats, tmp_str);
     s21_string_flags(formats, tmp_str);
   } else {
@@ -656,22 +656,22 @@ void add_for_fdeEfgG(struct s_struct *formats, char *tmp_str) {
 
 void s21_string_width(struct s_struct *formats, char *tmp_str) {
   int pos_str = (int)s21_strlen(tmp_str);
-  if (formats->Width > pos_str) {
-    tmp_str[formats->Width + 1] = '\0';
+  if (formats->Wdt > pos_str) {
+    tmp_str[formats->Wdt + 1] = '\0';
     while (pos_str >= 0) {
-      tmp_str[formats->Width--] = tmp_str[pos_str--];
+      tmp_str[formats->Wdt--] = tmp_str[pos_str--];
     }
-    for (pos_str = 0; pos_str <= formats->Width; pos_str++) {
-      if (s21_strchr("dopuxX", formats->specifier)) {
+    for (pos_str = 0; pos_str <= formats->Wdt; pos_str++) {
+      if (s21_strchr("dopuxX", formats->spec)) {
 
-        if (formats->flag_Zero && !formats->point) {
+        if (formats->flag_0 && !formats->point) {
           tmp_str[pos_str] = '0';
         } else {
           tmp_str[pos_str] = ' ';
         }
       }
-      if (s21_strchr("feEgGcs", formats->specifier)) {
-        if (formats->flag_Zero) {
+      if (s21_strchr("feEgGcs", formats->spec)) {
+        if (formats->flag_0) {
           tmp_str[pos_str] = '0';
         } else {
           tmp_str[pos_str] = ' ';
@@ -687,7 +687,7 @@ int check_specf(struct s_struct *formats, const char *format) {
                  *format == 'o' || *format == 'p' || *format == 's' ||
                  *format == 'u' || *format == 'x' || *format == 'X' ||
                  *format == '%'
-             ? 1 && (formats->specifier = *format)
+             ? 1 && (formats->spec = *format)
              : 0;
 }
 
@@ -695,11 +695,11 @@ void set_flags(struct s_struct *formats, const char *format) {
   if (*format == ' ') formats->flag_s = 1;
   if (*format == '+') formats->flag_p = 1;
   if (*format == '-') formats->flag_m = 1;
-  if (*format == '0') formats->flag_Zero = 1;
-  if (*format == '#') formats->flag_Sharp = 1;
+  if (*format == '0') formats->flag_0 = 1;
+  if (*format == '#') formats->flag_h = 1;
 }
 
-void set_width_Precision(int *number, const char *format, va_list *arg) {
+void set_width_accuracy(int *number, const char *format, va_list *arg) {
   if (*format == '*') {
     *number = va_arg(*arg, int);
     format++;
