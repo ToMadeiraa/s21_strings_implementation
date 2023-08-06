@@ -54,13 +54,13 @@ Suite *test_sscanf_real(void);
 Suite *test_sscanf_empty(void);
 
 Suite *test_sprintf(void);
-Suite *test_sprintf_signed(void);
+Suite *test_sprintf_znaked(void);
 Suite *test_sprintf_octal(void);
-Suite *test_sprintf_unsigned(void);
+Suite *test_sprintf_unznaked(void);
 Suite *test_sprintf_hex(void);
 Suite *test_sprintf_HEX(void);
 Suite *test_sprintf_percent(void);
-Suite *test_sprintf_pointer(void);
+Suite *test_sprintf_pnter(void);
 Suite *test_sscanf(void);
 Suite *test_sprintf_string(void);
 

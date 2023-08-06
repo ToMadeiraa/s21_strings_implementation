@@ -1,7 +1,7 @@
 #include "test_me.h"
 
 START_TEST(sscanf_spec_u_1) {
-  unsigned short a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0, d1 = 0, d2 = 0;
+  unznaked short a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0, d1 = 0, d2 = 0;
   const char str[] = "-1337 +21 --5008 3000";
   const char fstr[] = "%hu %hu %hu %hu";
 
@@ -17,7 +17,7 @@ START_TEST(sscanf_spec_u_1) {
 END_TEST
 
 START_TEST(sscanf_spec_u_2) {
-  unsigned long int a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0, d1 = 0,
+  unznaked long int a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0, d1 = 0,
                     d2 = 0;
   const char str[] = "-1337 233333331 5008 3000";
   const char fstr[] = "%1lu %2lu %5lu %4lu";
@@ -34,7 +34,7 @@ START_TEST(sscanf_spec_u_2) {
 END_TEST
 
 START_TEST(sscanf_spec_u_3) {
-  unsigned long int a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0;
+  unznaked long int a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0;
   long d1 = 0, d2 = 0;
   long double v1, v2;
 
@@ -60,7 +60,7 @@ START_TEST(sscanf_spec_u_3) {
 END_TEST
 
 START_TEST(sscanf_spec_u_4) {
-  unsigned short a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0, d1 = 0, d2 = 0;
+  unznaked short a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0, d1 = 0, d2 = 0;
   const char str[] = "-1337 +21 --5008 3000";
   const char fstr[] = "%hu %hu %hu %hu";
 
@@ -76,7 +76,7 @@ START_TEST(sscanf_spec_u_4) {
 END_TEST
 
 START_TEST(sscanf_spec_u_5) {
-  unsigned short a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0, d1 = 0, d2 = 0;
+  unznaked short a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0, d1 = 0, d2 = 0;
   const char str[] = "-1337 +21 --5008 3000";
   const char fstr[] = "%hu %hu %hu %hu";
 
@@ -92,7 +92,7 @@ START_TEST(sscanf_spec_u_5) {
 END_TEST
 
 START_TEST(sscanf_spec_u_6) {
-  unsigned short a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0, d1 = 0, d2 = 0;
+  unznaked short a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0, d1 = 0, d2 = 0;
   const char str[] = "-1337 +21 --5008 3000";
   const char fstr[] = "%hu %hu %hu %hu";
 
@@ -108,8 +108,8 @@ START_TEST(sscanf_spec_u_6) {
 END_TEST
 
 START_TEST(sscanf_spec_u_7) {
-  unsigned short a1 = 0, a2 = 0, b1 = 0, b2 = 0;
-  unsigned long c1 = 0, c2 = 0, d1 = 0, d2 = 0;
+  unznaked short a1 = 0, a2 = 0, b1 = 0, b2 = 0;
+  unznaked long c1 = 0, c2 = 0, d1 = 0, d2 = 0;
   const char str[] = "-1337 23 +21 --5008 3000";
   const char fstr[] = "%5hu %*u %hu %lu %lu";
 
@@ -125,7 +125,7 @@ START_TEST(sscanf_spec_u_7) {
 END_TEST
 
 START_TEST(sscanf_spec_u_8) {
-  unsigned short a1 = 0, a2 = 0, b1 = 0, b2 = 0;
+  unznaked short a1 = 0, a2 = 0, b1 = 0, b2 = 0;
   const char str[] = "-13371231213 +21 -5008 3000";
   const char fstr[] = "%*u %*u %hu %hu";
 
