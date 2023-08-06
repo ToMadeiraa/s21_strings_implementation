@@ -1,7 +1,7 @@
 #include "test_me.h"
 
-// One parameter pointer
-START_TEST(sprintf_1_pointer) {
+// One parameter pnter
+START_TEST(sprintf_1_pnter) {
   char str1[100] = "";
   char str2[100] = "";
   char* str3 = "Test %p Test";
@@ -11,8 +11,8 @@ START_TEST(sprintf_1_pointer) {
 }
 END_TEST
 
-// Three pointer parameters
-START_TEST(sprintf_2_pointer) {
+// Three pnter parameters
+START_TEST(sprintf_2_pnter) {
   char str1[100];
   char str2[100];
   char* str3 = "%p Test %p Test %p";
@@ -26,7 +26,7 @@ START_TEST(sprintf_2_pointer) {
 END_TEST
 
 // Three decimal parameters
-START_TEST(sprintf_3_pointer) {
+START_TEST(sprintf_3_pnter) {
   char str1[100];
   char str2[100];
   char* str3 = "%p Test %p Test %p";
@@ -40,14 +40,14 @@ START_TEST(sprintf_3_pointer) {
 END_TEST
 
 // Different sizes
-START_TEST(sprintf_4_pointer) {
+START_TEST(sprintf_4_pnter) {
   char str1[100];
   char str2[100];
   char* str3 = "%p Test %p Test %p GOD %p";
   long int* val = (void*)3088675747373646;
   long long int* val2 = (void*)33030030303;
-  unsigned short int* val3 = (void*)22600;
-  unsigned char* val4 = (void*)120;
+  unznaked short int* val3 = (void*)22600;
+  unznaked char* val4 = (void*)120;
   ck_assert_int_eq(sprintf(str1, str3, val, val2, val3, val4),
                    s21_sprintf(str2, str3, val, val2, val3, val4));
   ck_assert_pstr_eq(str1, str2);
@@ -55,7 +55,7 @@ START_TEST(sprintf_4_pointer) {
 END_TEST
 
 // Different width
-START_TEST(sprintf_5_pointer) {
+START_TEST(sprintf_5_pnter) {
   char str1[100];
   char str2[100];
   char* str3 = "%3p Test %5p Test %12p";
@@ -69,7 +69,7 @@ START_TEST(sprintf_5_pointer) {
 END_TEST
 
 // Different precision and width
-START_TEST(sprintf_6_pointer) {
+START_TEST(sprintf_6_pnter) {
   char str1[200];
   char str2[200];
   char* str3 = "%6.5p Test %.23p Test %3.p TEST %.p";
@@ -84,7 +84,7 @@ START_TEST(sprintf_6_pointer) {
 END_TEST
 
 // Minus flag
-START_TEST(sprintf_7_pointer) {
+START_TEST(sprintf_7_pnter) {
   char str1[200];
   char str2[200];
   char* str3 = "%-10.5p Test %-.4p Test %-16p TEST %-.5p";
@@ -99,7 +99,7 @@ START_TEST(sprintf_7_pointer) {
 END_TEST
 
 // Zeroes
-START_TEST(sprintf_8_pointer) {
+START_TEST(sprintf_8_pnter) {
   char str1[200];
   char str2[200];
   char* str3 = "%0p Test %0.p Test %0.0p TEST %0p GOD %.p";
@@ -115,7 +115,7 @@ START_TEST(sprintf_8_pointer) {
 END_TEST
 
 // Hash
-START_TEST(sprintf_13_pointer) {
+START_TEST(sprintf_13_pnter) {
   char str1[200];
   char str2[200];
   char* str3 = "%#p Test %#3p Test %#5.7p TEST %#.7p Oof %#.p";
@@ -131,7 +131,7 @@ START_TEST(sprintf_13_pointer) {
 END_TEST
 
 // ZERO flag
-START_TEST(sprintf_14_pointer) {
+START_TEST(sprintf_14_pnter) {
   char str1[200];
   char str2[200];
   char* str3 = "%0p Test %06p Test %05.7p TEST %0.7p Oof %0.p";
@@ -147,7 +147,7 @@ START_TEST(sprintf_14_pointer) {
 END_TEST
 
 // Asterisk
-START_TEST(sprintf_15_pointer) {
+START_TEST(sprintf_15_pnter) {
   char str1[200];
   char str2[200];
   char* str3 = "%*p Test %-*p Test %*.*p TEST %.*p Lololol %.*p";
@@ -170,21 +170,21 @@ START_TEST(sprintf_15_pointer) {
 }
 END_TEST
 
-Suite* test_sprintf_pointer(void) {
+Suite* test_sprintf_pnter(void) {
   Suite* s = suite_create("\033[45m-=S21_SPRINTF_POINTER=-\033[0m");
   TCase* tc = tcase_create("sprintf_tc");
 
-  tcase_add_test(tc, sprintf_1_pointer);
-  tcase_add_test(tc, sprintf_2_pointer);
-  tcase_add_test(tc, sprintf_3_pointer);
-  tcase_add_test(tc, sprintf_4_pointer);
-  tcase_add_test(tc, sprintf_5_pointer);
-  tcase_add_test(tc, sprintf_6_pointer);
-  tcase_add_test(tc, sprintf_7_pointer);
-  tcase_add_test(tc, sprintf_8_pointer);
-  tcase_add_test(tc, sprintf_13_pointer);
-  tcase_add_test(tc, sprintf_14_pointer);
-  tcase_add_test(tc, sprintf_15_pointer);
+  tcase_add_test(tc, sprintf_1_pnter);
+  tcase_add_test(tc, sprintf_2_pnter);
+  tcase_add_test(tc, sprintf_3_pnter);
+  tcase_add_test(tc, sprintf_4_pnter);
+  tcase_add_test(tc, sprintf_5_pnter);
+  tcase_add_test(tc, sprintf_6_pnter);
+  tcase_add_test(tc, sprintf_7_pnter);
+  tcase_add_test(tc, sprintf_8_pnter);
+  tcase_add_test(tc, sprintf_13_pnter);
+  tcase_add_test(tc, sprintf_14_pnter);
+  tcase_add_test(tc, sprintf_15_pnter);
 
   suite_add_tcase(s, tc);
   return s;

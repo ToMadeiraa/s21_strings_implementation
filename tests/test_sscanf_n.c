@@ -69,8 +69,8 @@ START_TEST(sscanf_spec_n_5) {
   int ff1 = 0, ff2 = 0;
   int k1 = 0, k2 = 0;
   short hn1 = 0, hn2 = 0;
-  unsigned char hhn1 = 0, hhn2 = 0;
-  unsigned char n1 = 0, n2 = 0;
+  unznaked char hhn1 = 0, hhn2 = 0;
+  unznaked char n1 = 0, n2 = 0;
 
   int16_t res1 =
       s21_sscanf(str, format, &d1, &hn1, &dd1, &hhn1, &f1, &ff1, &n1, &k1);

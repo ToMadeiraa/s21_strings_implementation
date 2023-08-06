@@ -46,8 +46,8 @@ START_TEST(sprintf_4_hex) {
   char *str3 = "%lx Test %lx Test %hx GOD %hx";
   long int val = 3088675747373646;
   long val2 = 33030030303;
-  unsigned short int val3 = 22600;
-  unsigned short val4 = 120;
+  unznaked short int val3 = 22600;
+  unznaked short val4 = 120;
   ck_assert_int_eq(sprintf(str1, str3, val, val2, val3, val4),
                    s21_sprintf(str2, str3, val, val2, val3, val4));
   ck_assert_pstr_eq(str1, str2);

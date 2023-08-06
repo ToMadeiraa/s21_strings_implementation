@@ -24,7 +24,7 @@ typedef enum lengthType {
 typedef struct token {
   char* str;     // строка перед %
   int wasSpace;  // 1 если предыдущая строка закончилась пробелом
-  unsigned int width;     // ширина
+  unznaked int width;     // ширина
   int type;               // спецификатор
   int skipPercent;        // 1 если % пропущен
   size_t prevStrLen;      // длина предыдущей строки
@@ -57,7 +57,7 @@ int isValidHexFormat(char*, int);
 int isValidDecimalFormat(char*, int);
 
 // парсинг числа из строки
-void parseUnsignedFromString(token, char**, va_list, int);
+void parseUnznakedFromString(token, char**, va_list, int);
 void parseNumberFromString(token, char**, va_list, int);
 
 // обработка токенов из строки
@@ -73,7 +73,7 @@ void skipOctalNumber(char** string, int width);
 // вспомогательные функции для processTokens для каждого спецификатора
 void processDecimalToken(token*, int, char**, va_list, int*, int*);
 void processIntegerToken(token*, int, char**, va_list, int*, int*);
-void processUnsignedToken(token*, int, char**, va_list, int*, int*);
+void processUnznakedToken(token*, int, char**, va_list, int*, int*);
 void processHexToken(token*, int, char**, va_list, int*, int*);
 void processOctalToken(token*, int, char**, va_list, int*, int*);
 void processCharToken(token*, int, char**, va_list, int*);

@@ -3,9 +3,9 @@
 START_TEST(sscanf_spec_hhx_11) {
   char format[] = "%*hhx %*hhx %*hhx";
   char str[] = "0x123 +04 -372f3";
-  unsigned char d1 = 0, d2 = 0;
-  unsigned char q1 = 0, q2 = 0;
-  unsigned char z1 = 0, z2 = 0;
+  unznaked char d1 = 0, d2 = 0;
+  unznaked char q1 = 0, q2 = 0;
+  unznaked char z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -19,9 +19,9 @@ END_TEST
 START_TEST(sscanf_spec_hx_2) {
   char format[] = "%hx%hx%hx";
   char str[] = "12a3 +156B4 -17C23";
-  unsigned short d1 = 0, d2 = 0;
-  unsigned short q1 = 0, q2 = 0;
-  unsigned short z1 = 0, z2 = 0;
+  unznaked short d1 = 0, d2 = 0;
+  unznaked short q1 = 0, q2 = 0;
+  unznaked short z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -35,8 +35,8 @@ END_TEST
 START_TEST(sscanf_spec_hx_3) {
   char format[] = "%hx%hx";
   char str[] = "0 +0x";
-  unsigned short d1 = 0, d2 = 0;
-  unsigned short q1 = 0, q2 = 0;
+  unznaked short d1 = 0, d2 = 0;
+  unznaked short q1 = 0, q2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1);
   int16_t res2 = sscanf(str, format, &d2, &q2);
@@ -49,9 +49,9 @@ END_TEST
 START_TEST(sscanf_spec_hx_4) {
   char format[] = "%hx%hx%hx";
   char str[] = "0 -0XABC -0X";
-  unsigned short d1 = 0, d2 = 0;
-  unsigned short q1 = 0, q2 = 0;
-  unsigned short z1 = 0, z2 = 0;
+  unznaked short d1 = 0, d2 = 0;
+  unznaked short q1 = 0, q2 = 0;
+  unznaked short z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -65,9 +65,9 @@ END_TEST
 START_TEST(sscanf_spec_hx_5) {
   char format[] = "%hx%hx%hx";
   char str[] = "0abc4 -0XABC 0x";
-  unsigned short d1 = 0, d2 = 0;
-  unsigned short q1 = 0, q2 = 0;
-  unsigned short z1 = 0, z2 = 0;
+  unznaked short d1 = 0, d2 = 0;
+  unznaked short q1 = 0, q2 = 0;
+  unznaked short z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -81,9 +81,9 @@ END_TEST
 START_TEST(sscanf_spec_hx_6) {
   char format[] = "%1hx %1hx %1hx";
   char str[] = "1a +04 -3723";
-  unsigned short d1 = 0, d2 = 0;
-  unsigned short q1 = 0, q2 = 0;
-  unsigned short z1 = 0, z2 = 0;
+  unznaked short d1 = 0, d2 = 0;
+  unznaked short q1 = 0, q2 = 0;
+  unznaked short z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -97,9 +97,9 @@ END_TEST
 START_TEST(sscanf_spec_hx_7) {
   char format[] = "%1hx %1hx %1hx";
   char str[] = "1a 0x -3723";
-  unsigned short d1 = 0, d2 = 0;
-  unsigned short q1 = 0, q2 = 0;
-  unsigned short z1 = 0, z2 = 0;
+  unznaked short d1 = 0, d2 = 0;
+  unznaked short q1 = 0, q2 = 0;
+  unznaked short z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -113,9 +113,9 @@ END_TEST
 START_TEST(sscanf_spec_hx_8) {
   char format[] = "%2hx %2hx %2hx";
   char str[] = "1a bc 0x -3723";
-  unsigned short d1 = 0, d2 = 0;
-  unsigned short q1 = 0, q2 = 0;
-  unsigned short z1 = 0, z2 = 0;
+  unznaked short d1 = 0, d2 = 0;
+  unznaked short q1 = 0, q2 = 0;
+  unznaked short z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -129,9 +129,9 @@ END_TEST
 START_TEST(sscanf_spec_hx_9) {
   char format[] = "%2hx %2hx %2hx";
   char str[] = "1a bCc 0x -3723";
-  unsigned short d1 = 0, d2 = 0;
-  unsigned short q1 = 0, q2 = 0;
-  unsigned short z1 = 0, z2 = 0;
+  unznaked short d1 = 0, d2 = 0;
+  unznaked short q1 = 0, q2 = 0;
+  unznaked short z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -145,9 +145,9 @@ END_TEST
 START_TEST(sscanf_spec_hx_11) {
   char format[] = "%*hx %*hx %*hx";
   char str[] = "0x123 +04 -372f3";
-  unsigned short d1 = 0, d2 = 0;
-  unsigned short q1 = 0, q2 = 0;
-  unsigned short z1 = 0, z2 = 0;
+  unznaked short d1 = 0, d2 = 0;
+  unznaked short q1 = 0, q2 = 0;
+  unznaked short z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -161,9 +161,9 @@ END_TEST
 START_TEST(sscanf_spec_x_2) {
   char format[] = "%x%x%x";
   char str[] = "12a3 +156B4 -17C23";
-  unsigned int d1 = 0, d2 = 0;
-  unsigned int q1 = 0, q2 = 0;
-  unsigned int z1 = 0, z2 = 0;
+  unznaked int d1 = 0, d2 = 0;
+  unznaked int q1 = 0, q2 = 0;
+  unznaked int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -177,8 +177,8 @@ END_TEST
 START_TEST(sscanf_spec_x_3) {
   char format[] = "%x%x";
   char str[] = "0 +0x";
-  unsigned int d1 = 0, d2 = 0;
-  unsigned int q1 = 0, q2 = 0;
+  unznaked int d1 = 0, d2 = 0;
+  unznaked int q1 = 0, q2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1);
   int16_t res2 = sscanf(str, format, &d2, &q2);
@@ -191,9 +191,9 @@ END_TEST
 START_TEST(sscanf_spec_x_4) {
   char format[] = "%x%x%x";
   char str[] = "0 -0XABC -0X";
-  unsigned int d1 = 0, d2 = 0;
-  unsigned int q1 = 0, q2 = 0;
-  unsigned int z1 = 0, z2 = 0;
+  unznaked int d1 = 0, d2 = 0;
+  unznaked int q1 = 0, q2 = 0;
+  unznaked int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -207,9 +207,9 @@ END_TEST
 START_TEST(sscanf_spec_x_5) {
   char format[] = "%x%x%x";
   char str[] = "0abc4 -0XABC 0x";
-  unsigned int d1 = 0, d2 = 0;
-  unsigned int q1 = 0, q2 = 0;
-  unsigned int z1 = 0, z2 = 0;
+  unznaked int d1 = 0, d2 = 0;
+  unznaked int q1 = 0, q2 = 0;
+  unznaked int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -223,9 +223,9 @@ END_TEST
 START_TEST(sscanf_spec_x_6) {
   char format[] = "%1x %1x %1x";
   char str[] = "1a +04 -3723";
-  unsigned int d1 = 0, d2 = 0;
-  unsigned int q1 = 0, q2 = 0;
-  unsigned int z1 = 0, z2 = 0;
+  unznaked int d1 = 0, d2 = 0;
+  unznaked int q1 = 0, q2 = 0;
+  unznaked int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -239,9 +239,9 @@ END_TEST
 START_TEST(sscanf_spec_x_7) {
   char format[] = "%1x %1x %1x";
   char str[] = "1a 0x -3723";
-  unsigned int d1 = 0, d2 = 0;
-  unsigned int q1 = 0, q2 = 0;
-  unsigned int z1 = 0, z2 = 0;
+  unznaked int d1 = 0, d2 = 0;
+  unznaked int q1 = 0, q2 = 0;
+  unznaked int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -255,9 +255,9 @@ END_TEST
 START_TEST(sscanf_spec_x_8) {
   char format[] = "%2x %2x %2x";
   char str[] = "1a bc 0x -3723";
-  unsigned int d1 = 0, d2 = 0;
-  unsigned int q1 = 0, q2 = 0;
-  unsigned int z1 = 0, z2 = 0;
+  unznaked int d1 = 0, d2 = 0;
+  unznaked int q1 = 0, q2 = 0;
+  unznaked int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -271,9 +271,9 @@ END_TEST
 START_TEST(sscanf_spec_x_9) {
   char format[] = "%2x %2x %2x";
   char str[] = "1a bCc 0x -3723";
-  unsigned int d1 = 0, d2 = 0;
-  unsigned int q1 = 0, q2 = 0;
-  unsigned int z1 = 0, z2 = 0;
+  unznaked int d1 = 0, d2 = 0;
+  unznaked int q1 = 0, q2 = 0;
+  unznaked int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -287,9 +287,9 @@ END_TEST
 START_TEST(sscanf_spec_x_11) {
   char format[] = "%*x %*x %*x";
   char str[] = "0x123 +04 -372f3";
-  unsigned int d1 = 0, d2 = 0;
-  unsigned int q1 = 0, q2 = 0;
-  unsigned int z1 = 0, z2 = 0;
+  unznaked int d1 = 0, d2 = 0;
+  unznaked int q1 = 0, q2 = 0;
+  unznaked int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -303,9 +303,9 @@ END_TEST
 START_TEST(sscanf_spec_lx_2) {
   char format[] = "%lx%lx%lx";
   char str[] = "12a3 +156B4 -17C23";
-  unsigned long int d1 = 0, d2 = 0;
-  unsigned long int q1 = 0, q2 = 0;
-  unsigned long int z1 = 0, z2 = 0;
+  unznaked long int d1 = 0, d2 = 0;
+  unznaked long int q1 = 0, q2 = 0;
+  unznaked long int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -319,8 +319,8 @@ END_TEST
 START_TEST(sscanf_spec_lx_3) {
   char format[] = "%lx%lx";
   char str[] = "0 +0x";
-  unsigned long int d1 = 0, d2 = 0;
-  unsigned long int q1 = 0, q2 = 0;
+  unznaked long int d1 = 0, d2 = 0;
+  unznaked long int q1 = 0, q2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1);
   int16_t res2 = sscanf(str, format, &d2, &q2);
@@ -333,9 +333,9 @@ END_TEST
 START_TEST(sscanf_spec_lx_4) {
   char format[] = "%lx%lx%lx";
   char str[] = "0 -0XABC -0X";
-  unsigned long int d1 = 0, d2 = 0;
-  unsigned long int q1 = 0, q2 = 0;
-  unsigned long int z1 = 0, z2 = 0;
+  unznaked long int d1 = 0, d2 = 0;
+  unznaked long int q1 = 0, q2 = 0;
+  unznaked long int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -349,9 +349,9 @@ END_TEST
 START_TEST(sscanf_spec_lx_5) {
   char format[] = "%lx%lx%lx";
   char str[] = "0abc4 -0XABC 0x";
-  unsigned long int d1 = 0, d2 = 0;
-  unsigned long int q1 = 0, q2 = 0;
-  unsigned long int z1 = 0, z2 = 0;
+  unznaked long int d1 = 0, d2 = 0;
+  unznaked long int q1 = 0, q2 = 0;
+  unznaked long int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -365,9 +365,9 @@ END_TEST
 START_TEST(sscanf_spec_lx_6) {
   char format[] = "%1lx %1lx %1lx";
   char str[] = "1a +04 -3723";
-  unsigned long int d1 = 0, d2 = 0;
-  unsigned long int q1 = 0, q2 = 0;
-  unsigned long int z1 = 0, z2 = 0;
+  unznaked long int d1 = 0, d2 = 0;
+  unznaked long int q1 = 0, q2 = 0;
+  unznaked long int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -381,9 +381,9 @@ END_TEST
 START_TEST(sscanf_spec_lx_7) {
   char format[] = "%1lx %1lx %1lx";
   char str[] = "1a 0x -3723";
-  unsigned long int d1 = 0, d2 = 0;
-  unsigned long int q1 = 0, q2 = 0;
-  unsigned long int z1 = 0, z2 = 0;
+  unznaked long int d1 = 0, d2 = 0;
+  unznaked long int q1 = 0, q2 = 0;
+  unznaked long int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -397,9 +397,9 @@ END_TEST
 START_TEST(sscanf_spec_lx_8) {
   char format[] = "%2lx %2lx %2lx";
   char str[] = "1a bc 0x -3723";
-  unsigned long int d1 = 0, d2 = 0;
-  unsigned long int q1 = 0, q2 = 0;
-  unsigned long int z1 = 0, z2 = 0;
+  unznaked long int d1 = 0, d2 = 0;
+  unznaked long int q1 = 0, q2 = 0;
+  unznaked long int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -413,9 +413,9 @@ END_TEST
 START_TEST(sscanf_spec_lx_9) {
   char format[] = "%2lx %2lx %2lx";
   char str[] = "1a bCc 0x -3723";
-  unsigned long int d1 = 0, d2 = 0;
-  unsigned long int q1 = 0, q2 = 0;
-  unsigned long int z1 = 0, z2 = 0;
+  unznaked long int d1 = 0, d2 = 0;
+  unznaked long int q1 = 0, q2 = 0;
+  unznaked long int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -429,9 +429,9 @@ END_TEST
 START_TEST(sscanf_spec_lx_11) {
   char format[] = "%*lx %*lx %*lx";
   char str[] = "0x123 +04 -372f3";
-  unsigned long int d1 = 0, d2 = 0;
-  unsigned long int q1 = 0, q2 = 0;
-  unsigned long int z1 = 0, z2 = 0;
+  unznaked long int d1 = 0, d2 = 0;
+  unznaked long int q1 = 0, q2 = 0;
+  unznaked long int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);
@@ -445,9 +445,9 @@ END_TEST
 START_TEST(sscanf_spec_llx_11) {
   char format[] = "%*llx %*llx %*llx";
   char str[] = "0x123 +04 -372f3";
-  unsigned long long int d1 = 0, d2 = 0;
-  unsigned long long int q1 = 0, q2 = 0;
-  unsigned long long int z1 = 0, z2 = 0;
+  unznaked long long int d1 = 0, d2 = 0;
+  unznaked long long int q1 = 0, q2 = 0;
+  unznaked long long int z1 = 0, z2 = 0;
 
   int16_t res1 = s21_sscanf(str, format, &d1, &q1, &z1);
   int16_t res2 = sscanf(str, format, &d2, &q2, &z2);

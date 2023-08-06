@@ -57,7 +57,7 @@ void processToken(token* tokens, int tokenIndex, char** string, va_list ap, int*
   } else if (tokens[tokenIndex].type == 'i') {
     processIntegerToken(tokens, tokenIndex, string, ap, argCount, flag);
   } else if (tokens[tokenIndex].type == 'u') {
-    processUnsignedToken(tokens, tokenIndex, string, ap, argCount, flag);
+    processUnznakedToken(tokens, tokenIndex, string, ap, argCount, flag);
   } else if (tokens[tokenIndex].type == 'x' || tokens[tokenIndex].type == 'X' ) {
     processHexToken(tokens, tokenIndex, string, ap, argCount, flag);
   } else if (tokens[tokenIndex].type == 'o') {
@@ -126,7 +126,7 @@ void processStringToken(token* tokens, int i, char** string, va_list ap, int* ar
     } else {
       if (tokens[i].lengthType == LENGTH_NONE) {
         char* arg = va_arg(ap, char*);
-        unsigned int j = 0;
+        unznaked int j = 0;
         while ((j < tokens[i].width || tokens[i].widthType == WIDTH_NONE) && **string != '\0' && !isSpace(**string)) {
           arg[j] = **string;
           j++;
@@ -135,7 +135,7 @@ void processStringToken(token* tokens, int i, char** string, va_list ap, int* ar
         arg[j] = '\0';
       } else if (tokens[i].lengthType == LENGTH_LONG_INT) {
         wchar_t* arg = va_arg(ap, wchar_t*);
-        unsigned int j = 0;
+        unznaked int j = 0;
         while ((j < tokens[i].width || tokens[i].widthType == WIDTH_NONE) && !isSpace(**string) && **string != '\0') {
           mbstowcs(&arg[j], *string, 1);
           j++;
@@ -164,7 +164,7 @@ void processPointerToken(token* tokens, int i, char** string, va_list ap, int* a
       tmp[1] = 'x';
       tmp[2] = '\0';
       s21_strcpy(tmp + 2, *string);
-      parseUnsignedFromString(tokens[i], string, ap, 16);
+      parseUnznakedFromString(tokens[i], string, ap, 16);
       free(tmp);
     }
   }
@@ -210,14 +210,14 @@ void processFloatToken(token* tokens, int i, char** string, va_list ap, int* arg
 }
 
 char* skipFloatNumber(char* str, int width) {
-  int flag = 0, point_flag = 0;
+  int flag = 0, pnt_flag = 0;
   if (width == 0) {
     width--;
   }
 
-  str = skipSignAndPoint(str, &width, &point_flag);
+  str = skipSignAndPoint(str, &width, &pnt_flag);
   str = skipDigits(str, &width, &flag);
-  str = skipPointAndDigits(str, &width, &flag, &point_flag);
+  str = skipPointAndDigits(str, &width, &flag, &pnt_flag);
   str = skipDigits(str, &width, &flag);
   str = skipExponential(str, &width, &flag);
   str = skipDigits(str, &width, &flag);
@@ -225,13 +225,13 @@ char* skipFloatNumber(char* str, int width) {
   return str;
 }
 
-void parseUnsignedFromString(token token, char** string, va_list ap, int base) {
+void parseUnznakedFromString(token token, char** string, va_list ap, int base) {
   if (token.widthType == WIDTH_STAR) {
     skipNumber(string, base, BUFF_SIZE);
   } else {
     if (token.lengthType == LENGTH_NONE) {
       if (token.widthType == WIDTH_NUMBER) {
-        unsigned int* arg = va_arg(ap, unsigned int*);
+        unznaked int* arg = va_arg(ap, unznaked int*);
         char* tmp = (char*)malloc((token.width + 1) * sizeof(char));
         s21_strncpy(tmp, *string, token.width);
         tmp[token.width] = '\0';
@@ -239,13 +239,13 @@ void parseUnsignedFromString(token token, char** string, va_list ap, int base) {
         free(tmp);
         skipNumber(string, base, token.width);
       } else {
-        unsigned int* arg = va_arg(ap, unsigned int*);
+        unznaked int* arg = va_arg(ap, unznaked int*);
         *arg = s21_strtol(*string, base);
         skipNumber(string, base, BUFF_SIZE);
       }
     } else if (token.lengthType == LENGTH_LONG_INT) {
       if (token.widthType == WIDTH_NUMBER) {
-        unsigned long* arg = va_arg(ap, unsigned long*);
+        unznaked long* arg = va_arg(ap, unznaked long*);
         char* tmp = (char*)malloc((token.width + 1) * sizeof(char));
         s21_strncpy(tmp, *string, token.width);
         tmp[token.width] = '\0';
@@ -253,13 +253,13 @@ void parseUnsignedFromString(token token, char** string, va_list ap, int base) {
         free(tmp);
         skipNumber(string, base, token.width);
       } else {
-        unsigned long* arg = va_arg(ap, unsigned long*);
+        unznaked long* arg = va_arg(ap, unznaked long*);
         *arg = s21_strtol(*string, base);
         skipNumber(string, base, BUFF_SIZE);
       }
     } else if (token.lengthType == LENGTH_SHORT) {
       if (token.widthType == WIDTH_NUMBER) {
-        unsigned short* arg = va_arg(ap, unsigned short*);
+        unznaked short* arg = va_arg(ap, unznaked short*);
         char* tmp = (char*)malloc((token.width + 1) * sizeof(char));
         s21_strncpy(tmp, *string, token.width);
         tmp[token.width] = '\0';
@@ -267,7 +267,7 @@ void parseUnsignedFromString(token token, char** string, va_list ap, int base) {
         free(tmp);
         skipNumber(string, base, token.width);
       } else {
-        unsigned short* arg = va_arg(ap, unsigned short*);
+        unznaked short* arg = va_arg(ap, unznaked short*);
         *arg = s21_strtol(*string, base);
         skipNumber(string, base, BUFF_SIZE);
       }
@@ -453,10 +453,10 @@ int isValidFloatFormat(char* str, int width) {
 }
 
 long s21_strtol(const char* str, int radix) {
-  int sign = 1, i = 0; 
+  int znak = 1, i = 0; 
   long int res = 0; 
   if (str[i] == '-') {
-    sign = -1;
+    znak = -1;
     i++;
   } else if (str[i] == '+') {
     i++;
@@ -481,15 +481,15 @@ long s21_strtol(const char* str, int radix) {
       i++;
     }
   }
-  return res * sign;
+  return res * znak;
 }
 
 long double s21_atold(char* str) {
-  int sign = 1, i = 0;
+  int znak = 1, i = 0;
   long double inc = 0.1L;
   long double res = 0.L;
   if (str[i] == '-') {
-    sign = -1;
+    znak = -1;
     i++;
   } else if (str[i] == '+') {
     i++;
@@ -525,7 +525,7 @@ long double s21_atold(char* str) {
       count--;
     }
   }
-  return res * sign;
+  return res * znak;
 }
 
 void processTokenCount(char** string, va_list ap, s21_size_t string_len) {
@@ -535,7 +535,7 @@ void processTokenCount(char** string, va_list ap, s21_size_t string_len) {
   *arg = string_len - cur_len;
 }
 
-char* skipSignAndPoint(char* str, int* width, int* point_flag) {
+char* skipSignAndPoint(char* str, int* width, int* pnt_flag) {
   if ((*str == '+' || *str == '-') && *width != 1) {
     if (*(str + 1) >= '0' && *(str + 1) <= '9') {
       *width -= 2;
@@ -545,7 +545,7 @@ char* skipSignAndPoint(char* str, int* width, int* point_flag) {
         if (*(str + 2) >= '0' && *(str + 2) <= '9') {
           *width -= 2;
           str += 2;
-          *point_flag = 1;
+          *pnt_flag = 1;
         }
       }
     }
@@ -562,8 +562,8 @@ char* skipDigits(char* str, int* width, int* flag) {
   return str;
 }
 
-char* skipPointAndDigits(char* str, int* width, int* flag, int* point_flag) {
-  if (*str == '.' && !(*point_flag) && *width != 0) {
+char* skipPointAndDigits(char* str, int* width, int* flag, int* pnt_flag) {
+  if (*str == '.' && !(*pnt_flag) && *width != 0) {
     if (*flag == 1)
       str++;
     else if (*(str + 1) >= '0' && *(str + 1) <= '9' && *width != 1)
@@ -735,12 +735,12 @@ void processIntegerToken(token* tokens, int i, char** string, va_list ap,
   }
 }
 
-void processUnsignedToken(token* tokens, int i, char** string, va_list ap,
+void processUnznakedToken(token* tokens, int i, char** string, va_list ap,
                           int* argCount, int* flag) {
   *flag = isValidDecimalFormat(*string, tokens[i].width);
   if (*flag) {
     if (tokens[i].widthType != WIDTH_STAR) (*argCount)++;
-    parseUnsignedFromString(tokens[i], string, ap, 10);
+    parseUnznakedFromString(tokens[i], string, ap, 10);
   }
 }
 
@@ -749,7 +749,7 @@ void processHexToken(token* tokens, int i, char** string, va_list ap,
   *flag = isValidHexFormat(*string, tokens[i].width);
   if (*flag) {
     if (tokens[i].widthType != WIDTH_STAR) (*argCount)++;
-    parseUnsignedFromString(tokens[i], string, ap, 16);
+    parseUnznakedFromString(tokens[i], string, ap, 16);
   }
 }
 
@@ -758,7 +758,7 @@ void processOctalToken(token* const tokens, int i, char** string, va_list ap,
   *flag = isValidOctalFormat(*string, tokens[i].width);
   if (*flag) {
     if (tokens[i].widthType != WIDTH_STAR) (*argCount)++;
-    parseUnsignedFromString(tokens[i], string, ap, 8);
+    parseUnznakedFromString(tokens[i], string, ap, 8);
   }
 }
 
