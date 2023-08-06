@@ -14,11 +14,11 @@ int s21_sprintf(char *str, const char *format, ...) {
     }
     if (*format == '%') {
       format++;
-      while (s21_check(format)) {
-        s21_init_flags(&formats, format++);
+      while (s21_check_flags(format)) {
+        set_flags(&formats, format++);
       }
-      while (s21_dig(format) || *format == '*') {
-        s21_precision(&formats.Wdt, format++, &arg);
+      while (check_dig(format) || *format == '*') {
+        set_width_accuracy(&formats.Wdt, format++, &arg);
         if (formats.Wdt < 0) {
           formats.Wdt *= -1;
           formats.flag_m = 1;
@@ -28,14 +28,14 @@ int s21_sprintf(char *str, const char *format, ...) {
         format++;
         formats.point = 1;
         formats.accuracy = 0;
-        while (s21_dig(format) || *format == '*')
-          s21_precision(&formats.accuracy, format++, &arg);
+        while (check_dig(format) || *format == '*')
+          set_width_accuracy(&formats.accuracy, format++, &arg);
       }
-      if (s21_lenght(format)) {
+      if (check_lenght(format)) {
         formats.flag_l = *format;
         format++;
       }
-      if (s21_specf(&formats, format)) {
+      if (check_specf(&formats, format)) {
         s21_default_precision(&formats);
       }
       s21_check(format, str, &formats, &arg, &zero_str_flag);
@@ -259,8 +259,8 @@ void s21_p(char *tmp_str, va_list *arg, struct s_struct *formats) {
   *s21p_str = '\0';
   s21_string_precision(formats, tmp_str);
   s21_strcat(tmp_str, buf);
-  s21_reverse(tmp_str);
-  s21_flags_str(formats, tmp_str);
+  s21_reverse_string(tmp_str);
+  s21_string_flags(formats, tmp_str);
   s21_string_width(formats, tmp_str);
 }
 void s21_xX(char *tmp_str, va_list *arg, struct s_struct *formats) {
@@ -280,7 +280,7 @@ void s21_xX(char *tmp_str, va_list *arg, struct s_struct *formats) {
     s21_xX_to_str(formats, tmp_str, number);
   }
   s21_string_precision(formats, tmp_str);
-  s21_flags_str(formats, tmp_str);
+  s21_string_flags(formats, tmp_str);
   s21_string_width(formats, tmp_str);
 }
 void s21_u(char *tmp_str, va_list *arg, struct s_struct *formats) {
@@ -300,7 +300,7 @@ void s21_u(char *tmp_str, va_list *arg, struct s_struct *formats) {
     s21_u_to_str(formats, tmp_str, number);
   }
   s21_string_precision(formats, tmp_str);
-  s21_flags_str(formats, tmp_str);
+  s21_string_flags(formats, tmp_str);
   s21_string_width(formats, tmp_str);
 }
 
@@ -320,7 +320,7 @@ void s21_o(char *tmp_str, va_list *arg, struct s_struct *formats) {
       s21_o_to_str(formats, tmp_str, number);
   }
   s21_string_precision(formats, tmp_str);
-  s21_flags_str(formats, tmp_str);
+  s21_string_flags(formats, tmp_str);
   s21_string_width(formats, tmp_str);
 }
 
@@ -343,7 +343,7 @@ void s21_s(char *p_str, va_list *arg, struct s_struct *formats) {
     }
   }
   s21_string_precision(formats, p_str);
-  s21_flags_str(formats, p_str);
+  s21_string_flags(formats, p_str);
   s21_string_width(formats, p_str);
 }
 
@@ -418,7 +418,7 @@ void s21_xX_to_str(struct s_struct *formats, char *tmp_str, unsigned long long n
   if (number == 0) {
     formats->flag_h = 0;
   }
-  s21_reverse(tmp_str);
+  s21_reverse_string(tmp_str);
 }
 
 void s21_u_to_str(struct s_struct *formats, char *tmp_str, unsigned long long number) {
@@ -441,7 +441,7 @@ void s21_u_to_str(struct s_struct *formats, char *tmp_str, unsigned long long nu
     }
 
   *point = '\0';
-  s21_reverse(tmp_str);
+  s21_reverse_string(tmp_str);
 }
 
 void s21_o_to_str(struct s_struct *formats, char *tmp_str, long long number) {
@@ -467,7 +467,7 @@ void s21_o_to_str(struct s_struct *formats, char *tmp_str, long long number) {
      *(point++) = '0';
   }
   *point = '\0';
-  s21_reverse(tmp_str);
+  s21_reverse_string(tmp_str);
 }
 
 void s21_default_precision(struct s_struct *formats) {
@@ -543,7 +543,7 @@ void s21_int_to_str(struct s_struct *formats, char *tmp_str, long double number)
       *point = digit + '0';
       point++;
     }
-  s21_reverse(tmp_str);
+  s21_reverse_string(tmp_str);
 }
 
 void s21_string_precision(struct s_struct *formats, char *tmp_str) {
@@ -571,7 +571,7 @@ void s21_string_precision(struct s_struct *formats, char *tmp_str) {
   free(string_precision);
 }
 
-void s21_flags_str(struct s_struct *formats, char *tmp_str) {
+void s21_string_flags(struct s_struct *formats, char *tmp_str) {
   int pos = 0;
   if (!s21_strchr("cuo\%", formats->spec)) {
     if (formats->sign < 0) {
@@ -646,9 +646,9 @@ void add_for_fdeEfgG(struct s_struct *formats, char *tmp_str) {
   if (formats->flag_0 == 1 && formats->flag_m != 1 && (formats->sign == -1 || formats->flag_s || (formats->sign == 1 && formats->flag_p == 1))) {
     formats->Wdt -= 1;
     s21_string_width(formats, tmp_str);
-    s21_flags_str(formats, tmp_str);
+    s21_string_flags(formats, tmp_str);
   } else {
-    s21_flags_str(formats, tmp_str);
+    s21_string_flags(formats, tmp_str);
     s21_string_width(formats, tmp_str);
   }
 }
@@ -681,7 +681,7 @@ void s21_string_width(struct s_struct *formats, char *tmp_str) {
   }
 }
 
-int s21_specf(struct s_struct *formats, const char *format) {
+int check_specf(struct s_struct *formats, const char *format) {
   return *format == 'c' || *format == 'd' || *format == 'e' || *format == 'E' ||
                  *format == 'f' || *format == 'g' || *format == 'G' ||
                  *format == 'o' || *format == 'p' || *format == 's' ||
@@ -691,7 +691,7 @@ int s21_specf(struct s_struct *formats, const char *format) {
              : 0;
 }
 
-void s21_init_flags(struct s_struct *formats, const char *format) {
+void set_flags(struct s_struct *formats, const char *format) {
   if (*format == ' ') formats->flag_s = 1;
   if (*format == '+') formats->flag_p = 1;
   if (*format == '-') formats->flag_m = 1;
@@ -699,7 +699,7 @@ void s21_init_flags(struct s_struct *formats, const char *format) {
   if (*format == '#') formats->flag_h = 1;
 }
 
-void s21_precision(int *number, const char *format, va_list *arg) {
+void set_width_accuracy(int *number, const char *format, va_list *arg) {
   if (*format == '*') {
     *number = va_arg(*arg, int);
     format++;
@@ -725,7 +725,7 @@ void s21_move_str(char *tmp_str) {
   }
 }
 
-void s21_reverse(char *str) {
+void s21_reverse_string(char *str) {
   char c = 0;
   s21_size_t length = s21_strlen(str);
   for (s21_size_t i = 0; i < length / 2; i++) {
@@ -738,7 +738,7 @@ void s21_reverse(char *str) {
 void s21_percent(char *tmp_str, struct s_struct *formats) {
   s21_strcat(tmp_str, "%");
   s21_string_precision(formats, tmp_str);
-  s21_flags_str(formats, tmp_str);
+  s21_string_flags(formats, tmp_str);
   s21_string_width(formats, tmp_str);
 }
 
@@ -754,21 +754,21 @@ void s21_c(char *p_str, va_list *arg, struct s_struct *formats, int *zero_str_fl
     formats->zero_simbol++;
     p_str[0] = '\0';
   }
-  s21_flags_str(formats, p_str);
+  s21_string_flags(formats, p_str);
   s21_string_width(formats, p_str);
 }
 
-int s21_check(const char *format) {
+int s21_check_flags(const char *format) {
   return *format == ' ' || *format == '-' || *format == '+' || *format == '0' ||
                  *format == '#'
              ? 1
              : 0;
 }
 
-int s21_lenght(const char *format) {
+int check_lenght(const char *format) {
   return *format == 'l' || *format == 'h' || *format == 'L' ? 1 : 0;
 }
 
-int s21_dig(const char *format) {
+int check_dig(const char *format) {
   return (int)(*format) >= 48 && (int)(*format) <= 57 ? 1 : 0;
 }
