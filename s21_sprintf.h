@@ -22,9 +22,9 @@ struct s_struct {
 void s21_add(char *str, const char *format, int *zero_str_flag, struct s_struct *formats);
 void s21_move_str(char *tmp_sr);
 int s21_check_flags(const char *format);
-int check_lenght(const char *format);
-int check_dig(const char *format);
-void s21_reverse_string(char *str);
+int s21_check_lenght(const char *format);
+int s21_check_digital(const char *format);
+void s21_reverse(char *str);
 int check_specf(struct s_struct *formats, const char *format);
 void set_flags(struct s_struct *formats, const char *format);
 void set_width_accuracy(int *number, const char *format, va_list *arg);
