@@ -19,16 +19,19 @@ struct s_struct {
   int step;
 } formats;
 
-void add_char(char *str, const char *format, int *zero_str_flag, struct s_struct *formats);
-void s21_move_string(char *tmp_sr);
-int check_flags(const char *format);
-int check_lenght(const char *format);
-int check_dig(const char *format);
-void s21_reverse_string(char *str);
-int check_specf(struct s_struct *formats, const char *format);
-void set_flags(struct s_struct *formats, const char *format);
-void set_width_accuracy(int *number, const char *format, va_list *arg);
-void s21_string_flags(struct s_struct *formats, char *tmp_str);
+void s21_add(char *str, const char *format, int *zero_str_flag, struct s_struct *formats);
+void s21_move_str(char *tmp_sr);
+int s21_check(const char *format);
+int s21_lenght(const char *format);
+int s21_dig(const char *format);
+void s21_reverse(char *str);
+int s21_specf(struct s_struct *formats, const char *format);
+void s21_init_flags(struct s_struct *formats, const char *format);
+void s21_precision(int *number, const char *format, va_list *arg);
+void s21_flags_str(struct s_struct *formats, char *tmp_str);
+
+
+
 void s21_string_width(struct s_struct *formats, char *tmp_str);
 void s21_string_precision(struct s_struct *formats, char *tmp_str);
 void s21_c(char *p_str, va_list *arg, struct s_struct *formats, int *zero_str_flag);
