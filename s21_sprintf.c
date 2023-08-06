@@ -84,15 +84,15 @@ void s21_flag_g(char *tmp_str, va_list *arg, struct s_struct *formats) {
   double number = 0;
   if (formats->flag_l == 'L') {
     l_number = va_arg(*arg, long double);
-    s21_gG_to_str(formats, tmp_str, l_number);
+    s21_flag_g_to_str(formats, tmp_str, l_number);
   } else {
     number = va_arg(*arg, double);
-    s21_gG_to_str(formats, tmp_str, number);
+    s21_flag_g_to_str(formats, tmp_str, number);
   } 
   add_for_fdeEfgG(formats, tmp_str);
 }
 
-void s21_gG_to_str(struct s_struct *formats, char *tmp_str,
+void s21_flag_g_to_str(struct s_struct *formats, char *tmp_str,
                    long double number) {
   if (number != 0) {
     formats->sign = number < 0 ? -1 : 1;
@@ -107,7 +107,7 @@ void s21_gG_to_str(struct s_struct *formats, char *tmp_str,
     } else {
       formats->accuracy--;
     }
-    s21_eE_to_str(formats, str_eE, number);
+    s21_flag_e_to_str(formats, str_eE, number);
     formats->accuracy = safe_pricision;
     int point = 0, flag_int = 0;
     int t_number = roundl(number);
@@ -121,10 +121,10 @@ void s21_gG_to_str(struct s_struct *formats, char *tmp_str,
     formats->accuracy -= point;
     if (flag_int == 0) {
       s21_float_to_str(formats, str_f, number);
-      s21_delete_zero(str_f, formats);
+      s21_delete_0(str_f, formats);
     } else {
       s21_int_to_str(formats, str_f, number);
-      s21_delete_zero(str_f, formats);
+      s21_delete_0(str_f, formats);
     }
     formats->accuracy = safe_pricision;
     s21_strcat(tmp_str, (formats->step >= -4 && formats->accuracy > formats->step) ? str_f : str_eE);
@@ -135,7 +135,7 @@ void s21_gG_to_str(struct s_struct *formats, char *tmp_str,
     s21_int_to_str(formats, tmp_str, 0);
   }
 }
-void s21_delete_zero(char *tmp_str, struct s_struct *formats) {
+void s21_delete_0(char *tmp_str, struct s_struct *formats) {
   int len_str = s21_strlen(tmp_str) - 1;
   if (formats->accuracy > 0)
     while (tmp_str[len_str] == '0') {
@@ -150,15 +150,15 @@ void s21_flag_e(char *tmp_str, va_list *arg, struct s_struct *formats) {
 
   if (formats->flag_l == 'L') {
     ld_number = va_arg(*arg, long double);
-    s21_eE_to_str(formats, tmp_str, ld_number);
+    s21_flag_e_to_str(formats, tmp_str, ld_number);
   } else {
     number = va_arg(*arg, double);
-    s21_eE_to_str(formats, tmp_str, number);
+    s21_flag_e_to_str(formats, tmp_str, number);
   }
   add_for_fdeEfgG(formats, tmp_str);
 }
 
-void s21_eE_to_str(struct s_struct *formats, char *tmp_str, long double number) {
+void s21_flag_e_to_str(struct s_struct *formats, char *tmp_str, long double number) {
   char r_line[256] = {0}, str_notat[256] = {0};
 
   if (number < 0) {
@@ -212,7 +212,7 @@ void s21_eE_to_str(struct s_struct *formats, char *tmp_str, long double number) 
   }
   s21_strcat(tmp_str, r_line);
   if (s21_strchr("gG", formats->spec) && formats->flag_h != 1) {
-    s21_delete_zero(tmp_str, formats);
+    s21_delete_0(tmp_str, formats);
   }
   s21_mantis(tmp_str, formats, notation, str_notat, flag);
   formats->sign = local_sign;
@@ -271,13 +271,13 @@ void s21_flag_x(char *tmp_str, va_list *arg, struct s_struct *formats) {
 
   if (formats->flag_l == 'l') {
     ld_number = va_arg(*arg, unsigned long);
-    s21_xX_to_str(formats, tmp_str, ld_number);
+    s21_flag_x_to_str(formats, tmp_str, ld_number);
   } else if (formats->flag_l == 'h') {
     sd_number = (unsigned short)va_arg(*arg, unsigned int);
-    s21_xX_to_str(formats, tmp_str, sd_number);
+    s21_flag_x_to_str(formats, tmp_str, sd_number);
   } else {
     number = va_arg(*arg, unsigned int);
-    s21_xX_to_str(formats, tmp_str, number);
+    s21_flag_x_to_str(formats, tmp_str, number);
   }
   s21_prec_str(formats, tmp_str);
   s21_flags_str(formats, tmp_str);
@@ -291,13 +291,13 @@ void s21_flag_u(char *tmp_str, va_list *arg, struct s_struct *formats) {
 
   if (formats->flag_l == 'l') {
     ul_number = va_arg(*arg, unsigned long);
-    s21_u_to_str(formats, tmp_str, ul_number);
+    s21_flag_u_to_str(formats, tmp_str, ul_number);
   } else if (formats->flag_l == 'h') {
     us_number = (unsigned short)va_arg(*arg, unsigned int);
-    s21_u_to_str(formats, tmp_str, us_number);
+    s21_flag_u_to_str(formats, tmp_str, us_number);
   } else {
     number = va_arg(*arg, unsigned int);
-    s21_u_to_str(formats, tmp_str, number);
+    s21_flag_u_to_str(formats, tmp_str, number);
   }
   s21_prec_str(formats, tmp_str);
   s21_flags_str(formats, tmp_str);
@@ -311,13 +311,13 @@ void s21_flag_o(char *tmp_str, va_list *arg, struct s_struct *formats) {
 
   if (formats->flag_l == 'l') {
     ld_number = va_arg(*arg, unsigned long int);
-    s21_o_to_str(formats, tmp_str, ld_number);
+    s21_flag_o_to_str(formats, tmp_str, ld_number);
   } else if (formats->flag_l == 'h') {
     sd_number = (unsigned short)va_arg(*arg, unsigned int);
-    s21_o_to_str(formats, tmp_str, sd_number);
+    s21_flag_o_to_str(formats, tmp_str, sd_number);
   } else {
       number = va_arg(*arg, unsigned int);
-      s21_o_to_str(formats, tmp_str, number);
+      s21_flag_o_to_str(formats, tmp_str, number);
   }
   s21_prec_str(formats, tmp_str);
   s21_flags_str(formats, tmp_str);
@@ -381,7 +381,7 @@ void s21_flag_d(char *tmp_str, va_list *arg, struct s_struct *formats) {
   add_for_fdeEfgG(formats, tmp_str);
 }
 
-void s21_xX_to_str(struct s_struct *formats, char *tmp_str, unsigned long long number) {
+void s21_flag_x_to_str(struct s_struct *formats, char *tmp_str, unsigned long long number) {
   char *point = s21_NULL;
   int flag = 1;
   int x_or_X = 0;
@@ -421,7 +421,7 @@ void s21_xX_to_str(struct s_struct *formats, char *tmp_str, unsigned long long n
   s21_reverse(tmp_str);
 }
 
-void s21_u_to_str(struct s_struct *formats, char *tmp_str, unsigned long long number) {
+void s21_flag_u_to_str(struct s_struct *formats, char *tmp_str, unsigned long long number) {
   char *point = s21_NULL;
   int flag = 1;
   point = tmp_str;
@@ -444,7 +444,7 @@ void s21_u_to_str(struct s_struct *formats, char *tmp_str, unsigned long long nu
   s21_reverse(tmp_str);
 }
 
-void s21_o_to_str(struct s_struct *formats, char *tmp_str, long long number) {
+void s21_flag_o_to_str(struct s_struct *formats, char *tmp_str, long long number) {
   char *point = s21_NULL;
   int flag = 1;
   point = tmp_str;
