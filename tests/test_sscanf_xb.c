@@ -95,7 +95,7 @@ START_TEST(upeer_hex_short) {
 END_TEST
 
 START_TEST(upeer_hex_long) {
-  unznaked long int a1, a2;
+  unsigned long int a1, a2;
   const char str[] = "F";
   const char fstr[] = "%lX";
   uint16_t res1 = s21_sscanf(str, fstr, &a1);
@@ -107,7 +107,7 @@ START_TEST(upeer_hex_long) {
 END_TEST
 
 START_TEST(upeer_hex_longlong) {
-  unznaked long int a1, a2;
+  unsigned long int a1, a2;
   const char str[] = "F";
   const char fstr[] = "%lX";
   uint16_t res1 = s21_sscanf(str, fstr, &a1);
@@ -163,7 +163,7 @@ START_TEST(upeer_hex_lower) {
 }
 END_TEST
 
-START_TEST(upeer_hex_znak) {
+START_TEST(upeer_hex_sign) {
   uint32_t a1, a2;
   const char str[] = "-f";
   const char fstr[] = "%X";
@@ -268,7 +268,7 @@ Suite *s21_sscanf_xb(void) {
   tcase_add_test(tc, upeer_hex_star);
   tcase_add_test(tc, upeer_hex_nohex);
   tcase_add_test(tc, upeer_hex_lower);
-  tcase_add_test(tc, upeer_hex_znak);
+  tcase_add_test(tc, upeer_hex_sign);
   tcase_add_test(tc, upper_hex_len);
   tcase_add_test(tc, simple_hex_test1);
   tcase_add_test(tc, simple_hex_test2);
