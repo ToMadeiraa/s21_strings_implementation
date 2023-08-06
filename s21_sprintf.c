@@ -51,25 +51,25 @@ void s21_check(const char *format, char *str, struct s_struct *formats, va_list 
   char *p_str = s21_NULL;
   p_str = calloc(1024, sizeof(char));
   if (*format == 'c') {
-    s21_c(p_str, arg, formats, zero_str_flag);
+    s21_flag_c(p_str, arg, formats, zero_str_flag);
   } else if (*format == 's') {
-    s21_s(p_str, arg, formats);
+    s21_flag_s(p_str, arg, formats);
   } else if (*format == 'd') {
-    s21_d(p_str, arg, formats);
+    s21_flag_d(p_str, arg, formats);
   } else if (*format == 'f') {
-    s21_f(p_str, arg, formats);
+    s21_flag_f(p_str, arg, formats);
   } else if (*format == 'o') {
-    s21_o(p_str, arg, formats);
+    s21_flag_o(p_str, arg, formats);
   } else if (*format == 'u') {
-    s21_u(p_str, arg, formats);
+    s21_flag_u(p_str, arg, formats);
   } else if (*format =='x' || *format == 'X') {
-    s21_xX(p_str, arg, formats);
+    s21_flag_x(p_str, arg, formats);
   } else if (*format == 'p') {
-    s21_p(p_str, arg, formats);
+    s21_flag_p(p_str, arg, formats);
   } else if (*format =='e' || *format == 'E') {
-    s21_eE(p_str, arg, formats);
+    s21_flag_e(p_str, arg, formats);
   } else if (*format =='g' || *format == 'G') {
-    s21_gG(p_str, arg, formats);
+    s21_flag_g(p_str, arg, formats);
   } else if (*format =='%') {
     s21_percent(p_str, formats);
   } else {
@@ -79,7 +79,7 @@ void s21_check(const char *format, char *str, struct s_struct *formats, va_list 
   free(p_str);
 }
 
-void s21_gG(char *tmp_str, va_list *arg, struct s_struct *formats) {
+void s21_flag_g(char *tmp_str, va_list *arg, struct s_struct *formats) {
   long double l_number = 0;
   double number = 0;
   if (formats->flag_l == 'L') {
@@ -144,7 +144,7 @@ void s21_delete_zero(char *tmp_str, struct s_struct *formats) {
     }
 }
 
-void s21_eE(char *tmp_str, va_list *arg, struct s_struct *formats) {
+void s21_flag_e(char *tmp_str, va_list *arg, struct s_struct *formats) {
   long double ld_number = 0;
   double number = 0;
 
@@ -239,7 +239,7 @@ void s21_mantis(char *tmp_str, struct s_struct *formats, int notation, char *str
   }
 }
 
-void s21_p(char *tmp_str, va_list *arg, struct s_struct *formats) {
+void s21_flag_p(char *tmp_str, va_list *arg, struct s_struct *formats) {
   char *s21p_str = s21_NULL;
   s21p_str = tmp_str;
   int *p = va_arg(*arg, int *);
@@ -263,7 +263,7 @@ void s21_p(char *tmp_str, va_list *arg, struct s_struct *formats) {
   s21_flags_str(formats, tmp_str);
   s21_width_str(formats, tmp_str);
 }
-void s21_xX(char *tmp_str, va_list *arg, struct s_struct *formats) {
+void s21_flag_x(char *tmp_str, va_list *arg, struct s_struct *formats) {
   unsigned long ld_number = 0;
   unsigned short sd_number = 0;
   unsigned int number = 0;
@@ -283,7 +283,7 @@ void s21_xX(char *tmp_str, va_list *arg, struct s_struct *formats) {
   s21_flags_str(formats, tmp_str);
   s21_width_str(formats, tmp_str);
 }
-void s21_u(char *tmp_str, va_list *arg, struct s_struct *formats) {
+void s21_flag_u(char *tmp_str, va_list *arg, struct s_struct *formats) {
   unsigned long ul_number = 0;
   unsigned short us_number = 0;
   unsigned int number = 0;
@@ -304,7 +304,7 @@ void s21_u(char *tmp_str, va_list *arg, struct s_struct *formats) {
   s21_width_str(formats, tmp_str);
 }
 
-void s21_o(char *tmp_str, va_list *arg, struct s_struct *formats) {
+void s21_flag_o(char *tmp_str, va_list *arg, struct s_struct *formats) {
   unsigned long int ld_number = 0;
   unsigned short int sd_number = 0;
   unsigned int number = 0;
@@ -324,7 +324,7 @@ void s21_o(char *tmp_str, va_list *arg, struct s_struct *formats) {
   s21_width_str(formats, tmp_str);
 }
 
-void s21_s(char *p_str, va_list *arg, struct s_struct *formats) {
+void s21_flag_s(char *p_str, va_list *arg, struct s_struct *formats) {
   char *string = s21_NULL;
   string = va_arg(*arg, char *);
   if (string == s21_NULL) {
@@ -347,7 +347,7 @@ void s21_s(char *p_str, va_list *arg, struct s_struct *formats) {
   s21_width_str(formats, p_str);
 }
 
-void s21_f(char *tmp_str, va_list *arg, struct s_struct *formats) {
+void s21_flag_f(char *tmp_str, va_list *arg, struct s_struct *formats) {
   double d_number = 0;
   long double l_number = 0;
 
@@ -362,7 +362,7 @@ void s21_f(char *tmp_str, va_list *arg, struct s_struct *formats) {
   add_for_fdeEfgG(formats, tmp_str);
 }
 
-void s21_d(char *tmp_str, va_list *arg, struct s_struct *formats) {
+void s21_flag_d(char *tmp_str, va_list *arg, struct s_struct *formats) {
   int number = 0;
   long int li_number = 0;
   short int sh_number = 0;
@@ -742,7 +742,7 @@ void s21_percent(char *tmp_str, struct s_struct *formats) {
   s21_width_str(formats, tmp_str);
 }
 
-void s21_c(char *p_str, va_list *arg, struct s_struct *formats, int *zero_str_flag) {
+void s21_flag_c(char *p_str, va_list *arg, struct s_struct *formats, int *zero_str_flag) {
   if (*zero_str_flag == 0) {
     p_str[0] = va_arg(*arg, int);
     if (p_str[0] == 0) {

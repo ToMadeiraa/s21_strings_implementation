@@ -31,16 +31,27 @@ void s21_set_acc(int *number, const char *format, va_list *arg);
 void s21_flags_str(struct s_struct *formats, char *tmp_str);
 void s21_width_str(struct s_struct *formats, char *tmp_str);
 void s21_prec_str(struct s_struct *formats, char *tmp_str);
-void s21_c(char *p_str, va_list *arg, struct s_struct *formats, int *zero_str_flag);
-void s21_s(char *p_str, va_list *arg, struct s_struct *formats);
-void s21_f(char *tmp_str, va_list *arg, struct s_struct *formats);
-void s21_d(char *tmp_str, va_list *arg, struct s_struct *formats);
-void s21_o(char *tmp_str, va_list *arg, struct s_struct *formats);
-void s21_u(char *tmp_str, va_list *arg, struct s_struct *formats);
-void s21_p(char *tmp_str, va_list *arg, struct s_struct *formats);
-void s21_xX(char *tmp_str, va_list *arg, struct s_struct *formats);
-void s21_eE(char *tmp_str, va_list *arg, struct s_struct *formats);
-void s21_gG(char *tmp_str, va_list *arg, struct s_struct *formats);
+
+
+
+
+void s21_flag_c(char *p_str, va_list *arg, struct s_struct *formats, int *zero_str_flag);
+void s21_flag_s(char *p_str, va_list *arg, struct s_struct *formats);
+void s21_flag_f(char *tmp_str, va_list *arg, struct s_struct *formats);
+void s21_flag_d(char *tmp_str, va_list *arg, struct s_struct *formats);
+void s21_flag_o(char *tmp_str, va_list *arg, struct s_struct *formats);
+void s21_flag_u(char *tmp_str, va_list *arg, struct s_struct *formats);
+void s21_flag_p(char *tmp_str, va_list *arg, struct s_struct *formats);
+void s21_flag_x(char *tmp_str, va_list *arg, struct s_struct *formats);
+void s21_flag_e(char *tmp_str, va_list *arg, struct s_struct *formats);
+void s21_flag_g(char *tmp_str, va_list *arg, struct s_struct *formats);
+
+
+
+
+
+
+
 void s21_int_to_str(struct s_struct *formats, char *tmp_str, long double number);
 void s21_float_to_str(struct s_struct *formats, char *tmp_str, long double number);
 void s21_o_to_str(struct s_struct *formats, char *tmp_str, long long number);
