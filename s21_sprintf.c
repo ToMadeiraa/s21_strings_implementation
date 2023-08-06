@@ -15,7 +15,7 @@ int s21_sprintf(char *str, const char *format, ...) {
     if (*format == '%') {
       format++;
       while (s21_check_flags(format)) {
-        set_flags(&formats, format++);
+        s21_set_flags(&formats, format++);
       }
       while (s21_check_digital(format) || *format == '*') {
         set_width_accuracy(&formats.Wdt, format++, &arg);
@@ -35,7 +35,7 @@ int s21_sprintf(char *str, const char *format, ...) {
         formats.flag_l = *format;
         format++;
       }
-      if (check_specf(&formats, format)) {
+      if (s21_check_specf(&formats, format)) {
         s21_default_precision(&formats);
       }
       s21_check(format, str, &formats, &arg, &zero_str_flag);
@@ -681,7 +681,7 @@ void s21_string_width(struct s_struct *formats, char *tmp_str) {
   }
 }
 
-int check_specf(struct s_struct *formats, const char *format) {
+int s21_check_specf(struct s_struct *formats, const char *format) {
   return *format == 'c' || *format == 'd' || *format == 'e' || *format == 'E' ||
                  *format == 'f' || *format == 'g' || *format == 'G' ||
                  *format == 'o' || *format == 'p' || *format == 's' ||
@@ -691,7 +691,7 @@ int check_specf(struct s_struct *formats, const char *format) {
              : 0;
 }
 
-void set_flags(struct s_struct *formats, const char *format) {
+void s21_set_flags(struct s_struct *formats, const char *format) {
   if (*format == ' ') formats->flag_s = 1;
   if (*format == '+') formats->flag_p = 1;
   if (*format == '-') formats->flag_m = 1;
