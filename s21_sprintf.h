@@ -60,12 +60,12 @@ void s21_flag_x_to_str(struct s_struct *struct_formatst, char *tmp_str, unsigned
 void s21_flag_e_to_str(struct s_struct *formats, char *tmp_str, long double number);
 void s21_flag_g_to_str(struct s_struct *formats, char *tmp_str, long double number);
 void s21_delete_0(char *tmp_str, struct s_struct *formats);
-void s21_sharp_flag(struct s_struct *formats, char *tmp_str);
-void s21_percent(char *tmp_str, struct s_struct *formats);
-void s21_check(const char *format, char *str, struct s_struct *formats, va_list *arg, int *zero_str_flag);
+void s21_flag_h(struct s_struct *formats, char *tmp_str);
+void s21_per(char *tmp_str, struct s_struct *formats);
+void s21_chk(const char *format, char *str, struct s_struct *formats, va_list *arg, int *zero_str_flag);
 int s21_sprintf(char *str, const char *format, ...);
-void s21_default_precision(struct s_struct *formats);
-void s21_mantis(char *tmp_str, struct s_struct *formats, int notation, char *str_notat, int flag);
-void add_for_fdeEfgG(struct s_struct *formats, char *tmp_str);  // повторяющийся модуль
+void s21_init_prec(struct s_struct *formats);
+void s21_mantissa(char *tmp_str, struct s_struct *formats, int notation, char *str_notat, int flag);
+void s21_add_for_all_flags(struct s_struct *formats, char *tmp_str);  // повторяющийся модуль
 
 #endif  // S21_SPRINTF_H_
