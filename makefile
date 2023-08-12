@@ -9,7 +9,7 @@ endif
 
 all: s21_string.a
 
-s21_string.a: *.o
+s21_string.a: 
 	ar rc s21_string.a $^
 	ranlib s21_string.a
 
