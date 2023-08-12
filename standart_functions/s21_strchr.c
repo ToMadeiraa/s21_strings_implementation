@@ -1,4 +1,4 @@
-#include "s21_string.h"
+#include "../s21_string.h"
 
 char *s21_strchr(const char *str, int c) {
   for (s21_size_t i = 0; i <= s21_strlen(str); i++) {

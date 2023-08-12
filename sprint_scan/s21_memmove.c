@@ -1,4 +1,4 @@
-#include "s21_string.h"
+#include "../s21_string.h"
 
 void *s21_memmove(void *dest, const void *src, s21_size_t n) {
   char *to = (char *)dest;

@@ -1,5 +1,5 @@
 
-#include "s21_sprintf.h"
+#include "../s21_sprintf.h"
 int s21_sprintf(char *str, const char *format, ...) {
   va_list arg;
   va_start(arg, format);

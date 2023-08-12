@@ -1,4 +1,4 @@
-#include "s21_string.h"
+#include "../s21_string.h"
 
 void *s21_insert(const char *src, const char *str, size_t start_index) {
   if (start_index > s21_strlen(src)) return s21_NULL;

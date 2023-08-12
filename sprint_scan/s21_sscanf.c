@@ -1,4 +1,4 @@
-#include "s21_sscanf.h"
+#include "../s21_sscanf.h"
 
 int s21_sscanf(const char* inputStr, const char* format, ...) {
   int argCount = -1;  // количество успешно считанных аргументов

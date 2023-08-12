@@ -1,4 +1,4 @@
-#include "s21_string.h"
+#include "../s21_string.h"
 
 char *s21_strcpy(char *dest, const char *src) {
   int i = 0;

@@ -1,4 +1,4 @@
-#include "s21_string.h"
+#include "../s21_string.h"
 
 #if defined(__APPLE__)
 #define ERROR "Unknown error: "
